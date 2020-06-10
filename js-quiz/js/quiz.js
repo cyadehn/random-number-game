@@ -51,7 +51,7 @@ let response;
 for ( let i = 0; i < quiz.length; i += 1 ) {
   
   //Captures quiz data for readability
-  question = quiz[i][0];
+  question = quiz[1][0];
   answer = quiz[i][1];
   
   //Capture prompt with question and initialize quiz array with response data
