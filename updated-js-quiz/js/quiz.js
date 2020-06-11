@@ -7,10 +7,8 @@ function print(message) {
 
 
 //My Functions
-//Adds String with Correct vs. Incorrect Answer to incorrectString variable
-function addIncorrectAnswer(forLoop) {
-  incorrectString += `<li>${quiz[forLoop][0]}<ul><li>Your answer: ${response}</li><li>Correct Answer: ${quiz[forLoop][1]}</li></ul></li>`
-}
+
+
 // Initial Quiz Array
 let quiz = [
   ['What number comes after 1?', '2'],
@@ -23,11 +21,13 @@ let quiz = [
 let correctAnswers = 0;
 let incorrectAnswers = 0;
 let answer;
-let correctString = `<ol>`;
-let incorrectString = `<ol>`;
-//Added Variables
 let question;
 let response;
+let incorrectString = `<ol>`;
+let correctString = `<ol>`;
+//Empty arrays for correct and incorrect answers
+let correct = [];
+let incorrect = [];
 
 
 //Improved Function (Dave's)
@@ -37,23 +37,35 @@ for ( let i = 0; i < quiz.length; i += 1 ) {
   answer = quiz[i][1];
   //Capture prompt with question and initialize quiz array with response data
   response = prompt(question);
-  quiz[i][2] = `${answer}`;
   //Cond. statement checks if answer is correct or not
   if ( response.toLowerCase() === answer ) {
     //Updates answer # and adds HTML to correctString
     correctAnswers += 1;
-    correctString += `<li>${quiz[i][0]}<ul><li>Correct Answer: ${quiz[i][1]}</li></ul></li>`;
+    correct[i][0] = answer;
+    correct[i][1] = response;
+    correct[i][2] = question;
   } else {
     //Updates answer # and calls addIncorrectAnswer function
     incorrectAnswers += 1;
-    addIncorrectAnswer(i);
+    incorrect[i][0] = answer;
+    incorrect[i][1] = response;
+    incorrect[i][2] = question;
   }
 }
 
-
-//adds ending </ol> tags to string variables
-correctString += `</ol>`;
-incorrectString += `</ol>`;
+function buildString(answersVar, stringVar) {
+  if ( answersVar === correct ) {
+    for ( let i = 0; i < answersVar.length; i += 1) {
+      stringVar += `<li>${answersVar[i][2]}<ul><li>Your Answer: ${answersVar[i][1]}</li></ul></li>`;
+    }
+    stringVar += `</ol>`
+  } else {
+    for ( let i = 0; i < answersVar.length; i += 1) {
+      stringVar += `<li>${answersVar[i][2]}<ul><li>Your Answer: ${answersVar[i][1]}</li><li>Correct Answer: ${answersVar[i][0]}</li></ul></li>`
+    }
+    stringVar += `</ol>`
+  }
+}
 
 //Initialize variable for final message
 let resultsHTML = `<p>You got <strong>${correctAnswers}</strong> answer(s) correct and <strong>${incorrectAnswers}</strong> answer(s) incorrect.<h2>Correct Answers</h2>${correctString}<h2>Incorrect Answers</h2>${incorrectString}`;
