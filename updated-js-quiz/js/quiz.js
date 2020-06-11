@@ -68,7 +68,7 @@ function buildString(answersVar, stringVar) {
 }
 
 //Initialize variable for final message
-let resultsHTML = `<p>You got <strong>${correctAnswers}</strong> answer(s) correct and <strong>${incorrectAnswers}</strong> answer(s) incorrect.<h2>Correct Answers</h2>${correctString}<h2>Incorrect Answers</h2>${incorrectString}`;
+let resultsHTML = `<p>You got <strong>${correctAnswers}</strong> answer(s) correct and <strong>${incorrectAnswers}</strong> answer(s) incorrect.<h2>Correct Answers</h2>${buildString(correct, correctString)}<h2>Incorrect Answers</h2>${buildString(incorrect, incorrectString)}`;
 
 //call print function with resultsHTML variable
 print(resultsHTML);
