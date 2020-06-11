@@ -7,7 +7,23 @@ function print(message) {
 
 
 //My Functions
-
+function responsePush(array) {
+  array.push([`${answer}`, `${response}`, `${question}`]);
+}
+function buildString(answersVar, stringVar) {
+  if ( answersVar === correct ) {
+    for ( let i = 0; i < answersVar.length; i += 1) {
+      stringVar += `<li>${answersVar[i][2]}<ul><li>Your Answer: ${answersVar[i][1]}</li></ul></li>`;
+    }
+    stringVar += `</ol>`
+  } else {
+    for ( let i = 0; i < answersVar.length; i += 1) {
+      stringVar += `<li>${answersVar[i][2]}<ul><li>Your Answer: ${answersVar[i][1]}</li><li>Correct Answer: ${answersVar[i][0]}</li></ul></li>`
+    }
+    stringVar += `</ol>`
+  }
+  return stringVar;
+}
 
 // Initial Quiz Array
 let quiz = [
@@ -30,7 +46,7 @@ let correct = [];
 let incorrect = [];
 
 
-//Improved Function (Dave's)
+//Improved Function
 for ( let i = 0; i < quiz.length; i += 1 ) {
   //Captures quiz data for readability
   question = quiz[i][0];
@@ -41,29 +57,11 @@ for ( let i = 0; i < quiz.length; i += 1 ) {
   if ( response.toLowerCase() === answer ) {
     //Updates answer # and adds HTML to correctString
     correctAnswers += 1;
-    correct[i][0] = answer;
-    correct[i][1] = response;
-    correct[i][2] = question;
+    responsePush(correct);
   } else {
     //Updates answer # and calls addIncorrectAnswer function
     incorrectAnswers += 1;
-    incorrect[i][0] = answer;
-    incorrect[i][1] = response;
-    incorrect[i][2] = question;
-  }
-}
-
-function buildString(answersVar, stringVar) {
-  if ( answersVar === correct ) {
-    for ( let i = 0; i < answersVar.length; i += 1) {
-      stringVar += `<li>${answersVar[i][2]}<ul><li>Your Answer: ${answersVar[i][1]}</li></ul></li>`;
-    }
-    stringVar += `</ol>`
-  } else {
-    for ( let i = 0; i < answersVar.length; i += 1) {
-      stringVar += `<li>${answersVar[i][2]}<ul><li>Your Answer: ${answersVar[i][1]}</li><li>Correct Answer: ${answersVar[i][0]}</li></ul></li>`
-    }
-    stringVar += `</ol>`
+    responsePush(incorrect);
   }
 }
 
