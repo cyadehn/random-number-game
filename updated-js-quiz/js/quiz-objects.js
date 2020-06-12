@@ -58,8 +58,8 @@ let incorrect = [];
 //Improved Function
 for ( let i = 0; i < quiz.length; i += 1 ) {
   //Captures quiz data for readability
-  question = quiz[i][0];
-  answer = quiz[i][1];
+  question = quiz[i].question;
+  answer = quiz[i].answer;
   //Capture prompt with question and initialize quiz array with response data
   response = prompt(question);
   //Cond. statement checks if answer is correct or not
