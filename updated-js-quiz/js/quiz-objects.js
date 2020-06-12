@@ -27,9 +27,18 @@ function buildString(answersVar, stringVar) {
 
 // Initial Quiz Array
 let quiz = [
-  ['What number comes after 1?', '2'],
-  ['What is the capital of California?', 'sacramento'],
-  ['Who are you?', 'somebody']
+  {
+    question: 'What number comes after 1?',
+    answer: '2'
+  },
+  {
+    question: 'What is the capital of California?',
+    answer: 'sacramento'
+  },
+  {
+    question: 'Who are you?',
+    answer: 'somebody'
+  }
 ];
 
 
