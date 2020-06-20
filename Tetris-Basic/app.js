@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Starting Variables ___________________________________________________________________________
     const grid = document.querySelector('.grid');
     let squares = Array.from(document.querySelectorAll('.grid div'));
     const ScoreDisplay = document.querySelector('#score');
@@ -41,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino];
-
     let currentPosition = 4;
     let currentRotation = 0;
 
@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let random = Math.floor(Math.random() * theTetrominoes.length);
     let current = theTetrominoes[random][currentRotation];
 
+    // Default Game Functions ___________________________________________________________________________
 
     //Draw tetrominoes on div grid
     function draw() {
@@ -106,6 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
             displaySquares[displayIndex + index].classList.add('tetromino');
         })
     }
+
+    // User-Input Functions ________________________________________________________________________________________________
 
     //move the tetromino left, unless at the edge or blocked
     function moveLeft() {
