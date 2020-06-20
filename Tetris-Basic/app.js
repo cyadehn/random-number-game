@@ -83,6 +83,67 @@ document.addEventListener('DOMContentLoaded', () => {
         freeze();
     }
 
+    //move the tetromino left, unless at the edge or blocked
+    function moveLeft() {
+        undraw();
+        const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0);
+        if(!isAtLeftEdge) currentPosition -= 1;
+        if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+            currentPosition += 1;
+        }
+        draw();
+    }
+
+    //move the tetromino right, unless at the edge or blocked
+    function moveRight() {
+        undraw();
+        const isAtRightEdge = current.some( index => ( currentPosition + index ) % width === width - 1 );
+        if ( !isAtRightEdge ) currentPosition += 1;
+        if ( current.some( index => squares[currentPosition + index].classList.contains('taken'))) {
+            currentPosition -= 1;
+        }
+        draw();
+    }
+
+    //rotate tetromino
+    function rotate() {
+        undraw();
+        currentRotation ++;
+        if(currentRotation === current.length ) { //if rotation gets to 4, reset to 0
+            currentRotation = 0;
+        }
+        current = theTetrominoes[random][currentRotation];
+        if ( current.some( index => (currentPosition + index) % width === 0 ) ) {
+            do {
+                currentPosition += 1;
+            } while ( current.some( index => (currentPosition + index) % width === 0 ) )
+        }
+        if ( current.some( index => ( currentPosition + index ) % width === width -1 )) {
+            do {
+                currentPosition -= 1;
+            } while ( current.some( index => ( currentPosition + index ) % width === width - 1))
+        }
+        draw();
+    }
+
     //make tetrominoes move down every second
     timerId = setInterval(moveDown, 500);
+
+    //assign functions to keyCodes
+    function control(e) {
+        if ( e.keyCode === 37 ) {
+            moveLeft();
+        };
+        if ( e.keyCode === 38 ) {
+            rotate();
+        };
+        if ( e.keyCode === 39 ) {
+            moveRight();
+        };
+        if ( e.keyCode === 40 ) {
+            moveDown();
+        }
+    }
+
+    document.addEventListener('keyup', control);
 })
