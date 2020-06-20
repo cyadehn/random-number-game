@@ -126,6 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //game over
+    function gameOver
+
     // User-Input Functions ________________________________________________________________________________________________
 
     //move the tetromino left, unless at the edge or blocked
