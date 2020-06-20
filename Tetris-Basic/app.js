@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             current.forEach(index => squares[currentPosition + index].classList.add('taken'));
             //start a new tetromino
             random = Math.floor(Math.random() * theTetrominoes.length);
+            currentRotation = 0;
             current = theTetrominoes[random][currentRotation];
             currentPosition = 4;
             draw();
@@ -145,6 +146,4 @@ document.addEventListener('DOMContentLoaded', () => {
             moveDown();
         }
     }
-
-    
 })
