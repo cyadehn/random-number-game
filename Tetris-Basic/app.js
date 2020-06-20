@@ -113,15 +113,15 @@ document.addEventListener('DOMContentLoaded', () => {
             currentRotation = 0;
         }
         current = theTetrominoes[random][currentRotation];
-        if ( current.some( index => (currentPosition + index) % width === 0 ) ) {
-            do {
-                currentPosition += 1;
-            } while ( current.some( index => (currentPosition + index) % width === 0 ) )
-        }
         if ( current.some( index => ( currentPosition + index ) % width === width -1 )) {
             do {
                 currentPosition -= 1;
             } while ( current.some( index => ( currentPosition + index ) % width === width - 1))
+        }
+        if ( current.some( index => (currentPosition + index) % width === 0 ) ) {
+            do {
+                currentPosition += 1;
+            } while ( current.some( index => (currentPosition + index) % width === 0 ) )
         }
         draw();
     }
