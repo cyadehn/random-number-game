@@ -130,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     timerId = setInterval(moveDown, 500);
 
     //assign functions to keyCodes
+    document.addEventListener('keyup', control);
     function control(e) {
         if ( e.keyCode === 37 ) {
             moveLeft();
@@ -145,5 +146,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    document.addEventListener('keyup', control);
+    
 })
