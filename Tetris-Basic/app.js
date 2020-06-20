@@ -64,12 +64,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //make tetrominoes move down every second
-    timerId = setInterval(moveDown, 1000);
+    timerId = setInterval(moveDown, 500);
     
     //moveDown function
     function moveDown() {
         undraw();
         currentPosition += width;
         draw();
+        freeze();
+    }
+
+    //freeze function
+    function freeze() {
+        if(current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
+            current.forEach(index => squares[currentPosition + index].classList.add('taken'));
+            //start a new tetromino
+            random = Math.floor(Math.random() * theTetrominoes.length);
+            current = theTetrominoes[random][currentRotation];
+            currentPosition = 4;
+            draw();
+        }
     }
 })
