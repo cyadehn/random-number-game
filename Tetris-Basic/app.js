@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     //Draw tetrominoes on div grid
-
     function draw() {
         current.forEach(index => {
             squares[currentPosition + index].classList.add('tetromino')
@@ -85,6 +84,26 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPosition += width;
         draw();
         freeze();
+    }
+
+    //show up-next tetromino in mini-grid
+    const displaySquares = document.querySelectorAll('.mini-grid div');
+    const displayWidth = 4;
+    let displayIndex = 0;
+
+    const upNextTetrominoes = [
+        [1, displayWidth+1, displayWidth*2+1, 2], //lTetromino
+        [0, displayWidth, displayWidth+1, displayWidth*2+1], //zTetromino 
+        [displayWidth, 1, displayWidth+1, displayWidth+2], //tTetromino
+        [0, 1, displayWidth, displayWidth+1], //oTetromino
+        [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] //iTetromino
+    ]
+
+    function displayShape() {
+        displaySquares.forEach( square => {square.classList.remove('tetromino')});
+        upNextTetrominoes[nextRandom].forEach( index => {
+            displaySquares[displayIndex + index].classList.add('tetromino');
+        })
     }
 
     //move the tetromino left, unless at the edge or blocked
@@ -130,10 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         draw();
     }
 
-    //make tetrominoes move down every second
-    timerId = setInterval(moveDown, 500);
-
-    //assign functions to keyCodes
+    //assign keyCode functions
     document.addEventListener('keyup', control);
     function control(e) {
         if ( e.keyCode === 37 ) {
@@ -150,23 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    //show up-next tetromino in mini-grid
-    const displaySquares = document.querySelectorAll('.mini-grid div');
-    const displayWidth = 4;
-    let displayIndex = 0;
-
-    const upNextTetrominoes = [
-        [1, displayWidth+1, displayWidth*2+1, 2], //lTetromino
-        [0, displayWidth, displayWidth+1, displayWidth*2+1], //zTetromino 
-        [displayWidth, 1, displayWidth+1, displayWidth+2], //tTetromino
-        [0, 1, displayWidth, displayWidth+1], //oTetromino
-        [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] //iTetromino
-    ]
-
-    function displayShape() {
-        displaySquares.forEach( square => {square.classList.remove('tetromino')});
-        upNextTetrominoes[nextRandom].forEach( index => {
-            displaySquares[displayIndex + index].classList.add('tetromino');
-        })
-    }
+    //make tetrominoes move down every .5 second
+    timerId = setInterval(moveDown, 500);    
 })
