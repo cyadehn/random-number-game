@@ -115,7 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
             currentPosition += 1;
         }
-        draw();
+        draw()
+        freeze();
     }
 
     //move the tetromino right, unless at the edge or blocked
@@ -127,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentPosition -= 1;
         }
         draw();
+        freeze();
     }
 
     //rotate tetromino
