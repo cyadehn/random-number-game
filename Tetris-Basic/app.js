@@ -173,10 +173,14 @@ document.addEventListener('DOMContentLoaded', () => {
             clearInterval(timerId);
             timerId = null;
         } else {
-            draw();
-            timerId = setInterval(moveDown, 500); //make tetrominoes move down every .5 second
-            nextRandom = Math.floor(Math.random() * theTetrominoes.length);
-            displayShape();
+            if (nextRandom) {
+                timerId = setInterval(moveDown, 500);
+            } else {
+                draw();
+                timerId = setInterval(moveDown, 500);
+                nextRandom = Math.floor(Math.random() * theTetrominoes.length);
+                displayShape();
+            }    
         }
     });
 })
