@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             draw();
             displayShape();
             addScore();
+            gameOver();
         }
     }
     
@@ -127,7 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //game over
-    function gameOver
+    function gameOver() {
+        if(current.some( index => squares[currentPosition + index].classList.contains('taken'))) {
+            ScoreDisplay.innerHTML += ' <strong>END</strong>';
+            clearInterval(timerId);
+        }
+    }
 
     // User-Input Functions ________________________________________________________________________________________________
 
