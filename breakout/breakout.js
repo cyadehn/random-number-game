@@ -19,13 +19,29 @@ function drawBall() {
 }
 
 function draw() {
-    ctx.clearRect( 0, 0, canvas.width, canvas.height )
+    ctx.clearRect( 0, 0, canvas.width, canvas.height );
     drawBall();
-    if ( y + dy < 0 + ballRadius || y + dy > canvas.height - ballRadius ) {
-        dy = -dy;
-    }
+    drawPaddle();
     if ( x + dx < 0 + ballRadius || x + dx > canvas.width - ballRadius ) {
         dx = -dx;
+    }
+    if ( y + dy < 0 + ballRadius ) {
+        dy = -dy;
+    } else if ( y + dy > canvas.height - ballRadius ) {
+        if ( x > paddleX && x < paddleX + paddleWidth ) {
+            dy = -dy;
+        } else {
+            clearInterval(timerId);
+            setTimeout( () => {
+                ctx.clearRect( 0, 0, canvas.width, canvas.height );
+                ctx.textAlign = "center";
+                ctx.fillText( "GAME OVER", canvas.width/2, canvas.height/2);
+                setTimeout( () => {
+                    ctx.clearRect( 0, 0, canvas.width, canvas.height);
+                    document.location.reload();
+                }, 3000);}
+                , 500 );
+        }
     }
     x += dx;
     y += dy;
@@ -43,6 +59,17 @@ function drawPaddle() {
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
+    if (rightPressed) {
+        paddleX += 5;
+        if ( paddleX + paddleWidth > canvas.width ) {
+            paddleX = canvas.width - paddleWidth;
+        }
+    } else if (leftPressed) {
+        paddleX -= 5;
+        if ( paddleX < 0 ) {
+            paddleX = 0;
+        }
+    }
 }
 
 /* User-Input Functions ------------------------------ */
@@ -51,24 +78,20 @@ var rightPressed = false;
 var leftPressed = false;
 
 document.addEventListener('keydown', keyDownHandler, false);
-document.addEventListener('keyup', keyDownHandler, false);
+document.addEventListener('keyup', keyUpHandler, false);
 
 function keyDownHandler(e) {
     if ( e.key == "Right" || e.key == "ArrowRight" ) {
         rightPressed = true;
-    }
-    if ( e.key == "Left" || e.key == "ArrowLeft" ) {
-        leftPressed == true;
+    } else if ( e.key == "Left" || e.key == "ArrowLeft" ) {
+        leftPressed = true;
     }
 }
 
 function keyUpHandler(e) {
     if ( e.key == "Right" || e.key == "ArrowRight" ) {
         rightPressed = false;
-    }
-    if ( e.key == "Left" || e.key == "ArrowLeft" ) {
+    } else if ( e.key == "Left" || e.key == "ArrowLeft" ) {
         leftPressed = false;
     }
 }
-
-
