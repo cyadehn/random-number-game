@@ -20,6 +20,7 @@ function drawBall() {
 
 function draw() {
     ctx.clearRect( 0, 0, canvas.width, canvas.height );
+    drawBricks();
     drawBall();
     drawPaddle();
     if ( x + dx < 0 + ballRadius || x + dx > canvas.width - ballRadius ) {
@@ -27,11 +28,11 @@ function draw() {
     }
     if ( y + dy < 0 + ballRadius ) {
         dy = -dy;
-    } else if ( y + dy > canvas.height - ballRadius ) {
+    } else if ( y + dy > canvas.height - ballRadius - paddleHeight ) {
         if ( x > paddleX && x < paddleX + paddleWidth ) {
             dy = -dy;
         } else {
-            clearInterval(timerId);
+            setTimeout(clearInterval(timerId), (80));
             setTimeout( () => {
                 ctx.clearRect( 0, 0, canvas.width, canvas.height );
                 ctx.textAlign = "center";
@@ -68,6 +69,38 @@ function drawPaddle() {
         paddleX -= 5;
         if ( paddleX < 0 ) {
             paddleX = 0;
+        }
+    }
+}
+
+let brickRowCount = 10;
+let brickColumnCount = 7;
+let brickPadding = 10;
+let brickOffsetTop = 20;
+let brickOffsetLeft = 20;
+let brickWidth = (canvas.width - (brickOffsetLeft*2) - (brickPadding*(brickRowCount-1)))/brickRowCount;
+let brickHeight = 20;
+
+let bricks = [];
+for(var c=0; c<brickColumnCount; c+=1 ) {
+    bricks[c] = [];
+    for(let r=0; r<brickRowCount; r +=1 ) {
+    bricks[c][r] = { x: 0, y: 0 };
+    }
+}
+
+function drawBricks() {
+    for(let c=0; c<brickColumnCount; c += 1) {
+        for(let r=0; r<brickRowCount; r += 1) {
+            let brickX = (c*(brickWidth + brickPadding))+brickOffsetLeft;
+            let brickY = (r*(brickHeight + brickPadding))+brickOffsetTop;
+            bricks[c][r].x = 0;
+            bricks[c][r].y = 0;
+            ctx.beginPath();
+            ctx.rect( brickX, brickY , brickWidth, brickHeight);
+            ctx.fillStyle = '#0095DD';
+            ctx.fill();
+            ctx.closePath;            
         }
     }
 }
