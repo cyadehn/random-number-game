@@ -5,11 +5,11 @@ class App extends Component {
         return (
             <div className="gameWindow">
 
-                <gameStart />
+                <GameStart />
 
-                <chatBox />
+                <ChatBox />
 
-                <mainGame />
+                <MainGame />
 
             </div>
         );
