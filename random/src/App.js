@@ -4,11 +4,25 @@ import ChatBox from './components/ChatBox';
 import MainGame from './components/MainGame';
 
 class App extends Component {
+    
+    state = {
+        upper: 20
+    }
+
+    setRandomNumber = () => {
+        this.setState( () => ({
+            randomNumber: Math.floor(Math.random() * this.upper) + 1
+        }));
+    }
+
     render() {
         return (
             <div className="gameWindow">
 
-                <GameStart />
+                <GameStart
+                    upper={this.state.upper}
+                    setRandomNumber={this.setRandomNumber}
+                />
 
                 <ChatBox />
 
