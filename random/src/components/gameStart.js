@@ -3,14 +3,9 @@ import React, { Component } from 'react';
 class GameStart extends Component {
    
    state = {
-      randomNumber: 0
-   }
-
-   tSec = (end, start) => {
-      let timeDiff = end - start;
-      timeDiff /= 1000;
-      let tSec = Math.round(timeDiff);
-      return tSec;
+      randomNumber: 0,
+      timeStart: 0,
+      timeEnd: 0
    }
 
    // Currently working on below 

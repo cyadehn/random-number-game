@@ -15,6 +15,13 @@ class App extends Component {
         }));
     }
 
+    tSec = (end, start) => {
+        let timeDiff = end - start;
+        timeDiff /= 1000;
+        let tSec = Math.round(timeDiff);
+        return tSec;
+     }
+
     render() {
         return (
             <div className="gameWindow">
@@ -22,6 +29,7 @@ class App extends Component {
                 <GameStart
                     upper={this.state.upper}
                     setRandomNumber={this.setRandomNumber}
+                    tSec={this.tSec}
                 />
 
                 <ChatBox />
