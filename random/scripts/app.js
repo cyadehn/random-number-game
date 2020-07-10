@@ -28,9 +28,10 @@ const tSec = (end, start) => {
 }
 
 const prompt = () => {
-    // let speed = 100;
-    // let i = 0;
+    let speed = 100;
+    let i = 0;
     let message;
+    
     speechBox.innerHTML = "";
     if ( attempts === 0 ) {
         message = `Hey, guess a number between 1 and ${upper}!`;
@@ -39,20 +40,20 @@ const prompt = () => {
     } else {
         message = `There you go! You guessed correctly!<br>The number was <strong>${randomNumber}</strong>, and it took you ${attempts} tries and ${tSec(t1, t0)} seconds to get it.`;
     }
-    
     console.log(message);
-    
-    speechBox.innerHTML = message;
 
-    // const typewriter = () => {
-    //     if ( i < message.length ) {
-    //         speechBox.innerHTML += message.charAt(i);
-    //         i += 1;
-    //     }
-    //     setTimeout(typewriter, speed);
-    //     console.log(i);
-    // }
-    // typewriter();
+    const typewriter = () => {
+        const typeoutID = setTimeout(typewriter, speed);
+        if ( i < message.length ) {
+            speechBox.innerHTML += message.charAt(i);
+            i += 1;
+            console.log(i);
+        } else {
+             clearInterval(typeoutID);
+             console.log("end");
+         }
+    }
+    typewriter();
 }
 
 const checkAnswer = () => {
