@@ -65,6 +65,7 @@ const checkAnswer = () => {
     if ( parseInt(guess) === randomNumber ) {
         t1 = Date.now();
         correctGuess = true;
+        guessInput.disabled = true;
     }
     prompt();
 }
