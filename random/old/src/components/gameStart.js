@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class GameStart extends Component {
    
    state = {
-      randomNumber: 0,
+      randomNumber: 0, //If this needs to be immutable, then I need to lift it to App
       timeStart: 0,
       timeEnd: 0
    }
