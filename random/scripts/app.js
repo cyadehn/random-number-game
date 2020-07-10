@@ -6,7 +6,9 @@ let attempts = 0;
 let guess;
 let t0 = 0;
 let t1 = 0;
-
+let message;
+let speed = 100;
+let typewriterID;
 const guessInput = document.getElementById("guess-input");
 const submitBtn = document.getElementById("guess-submit");
 const prevGuesses = document.getElementById("prev-guesses");
@@ -28,11 +30,24 @@ const tSec = (end, start) => {
 }
 
 const prompt = () => {
-    let speed = 100;
-    let i = 0;
-    let message;
     
+    /* Clear previous message */
     speechBox.innerHTML = "";
+
+    let i = 0;
+
+    const typewriter = () => {
+        typewriterID = setTimeout(typewriter, speed);
+        if ( i < message.length ) {
+            speechBox.innerHTML += message.charAt(i);
+            i += 1;
+            console.log(i);
+        } else {
+             clearTimeout(typewriterID);
+             console.log("end");
+         }
+    }
+    
     if ( attempts === 0 ) {
         message = `Hey, guess a number between 1 and ${upper}!`;
     } else if ( !correctGuess ) {
@@ -40,23 +55,11 @@ const prompt = () => {
     } else {
         message = `There you go! You guessed correctly!<br>The number was <strong>${randomNumber}</strong>, and it took you ${attempts} tries and ${tSec(t1, t0)} seconds to get it.`;
     }
-    console.log(message);
-
-    const typewriter = () => {
-        const typeoutID = setTimeout(typewriter, speed);
-        if ( i < message.length ) {
-            speechBox.innerHTML += message.charAt(i);
-            i += 1;
-            console.log(i);
-        } else {
-             clearInterval(typeoutID);
-             console.log("end");
-         }
-    }
     typewriter();
 }
 
 const checkAnswer = () => {
+    clearTimeout(typewriterID);
     if ( attempts === 0 ) {
         t0 = Date.now();
     }
