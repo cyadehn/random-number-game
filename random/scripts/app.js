@@ -14,7 +14,7 @@ const speechBox = document.getElementById("speech-box");
 
 for ( let i = 0; i < upper; i ++ ) {
     div = document.createElement("div");
-    div.innerHTML = `${i}`
+    div.innerHTML = `${i + 1}`
     prevGuesses.appendChild(div);
 }
 
