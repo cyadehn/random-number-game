@@ -69,18 +69,6 @@ const prompt = () => {
     typewriter();
 }
 
-const checkAnswer = () => {
-    if ( attempts === 0 ) {
-        t0 = Date.now();
-    }
-    if ( guess === randomNumber ) {
-        t1 = Date.now();
-        correctGuess = true;
-        guessInput.disabled = true;
-    }
-    prompt();
-}
-
 const guessTracker = () =>{
     guessDiv = guessGrid[guess - 1];
     guessDiv.classList.remove("not-guessed");
@@ -89,6 +77,29 @@ const guessTracker = () =>{
     } else {
         guessDiv.classList.add("guessed");
     }
+}
+
+const checkAnswer = () => {
+    guessTracker();
+    if ( attempts === 0 ) {
+        t0 = Date.now();
+    }
+    if ( guess === randomNumber ) {
+        t1 = Date.now();
+        correctGuess = true;
+        guessInput.disabled = true;
+        endGame();
+    }
+    prompt();
+}
+
+
+
+const endGame = () => {
+    let remainder = guessGrid.filter( item => item.classList.contains("not-guessed"));
+    console.log(remainder);
+    remainder.forEach( item => item.classList.remove("not-guessed") );
+    remainder.forEach( item => item.classList.add("guessed") );
 }
 
 /* User Interaction */
@@ -113,7 +124,6 @@ submitBtn.addEventListener("click", (e) => {
     guess = parseInt(guessInput.value);
     if ( guess > 0 && guess <= randomNumber ) {
         checkAnswer();
-        guessTracker();
     } else {
         invalidGuess = true;
         prompt();
