@@ -2,9 +2,14 @@
     box-sizing: border-box;
 }
 
+body {
+    background: black;
+}
+
 .container header {
     text-align: center;
     padding: 10px;
+    color: lime;
 }
 
 .container {
@@ -14,7 +19,7 @@
 }
 
 .app-demo {
-    background: grey;
+    background: lime;
     width: 90vw;
     height: 70vh;
     /* min-width: 600px; */
@@ -27,10 +32,9 @@
 }
 
 .game-start {
-    width: 90%;
-    height: 95%;
-    background: white;
-    border: solid 2px black;
+    width: 95%;
+    height: 97%;
+    background: black;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -39,15 +43,35 @@
 
 .basic-game {
     text-align: center;
+    position: relative;
+    height: 100%;
+}
+
+#user-input {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+#user-input #guess-input {
+    width: 70%;
+    background: black;
+    border: solid 2px lime;
+    color: lime;
+}
+
+#user-input #guess-submit {
+    width: 25%;
+    background: lime;
+    color: black;
+    border: none;
 }
 
 .speech-box {
     background-color: black;
     /* box-shadow: inset 0 0 10px white; */
-    width: 90%;
+    width: 100%;
     max-width: 500px;
     font-size: 1.25em;
-    height: auto;
     min-height: 110px;
     margin: 0 auto;
     padding: 15px;
@@ -58,6 +82,9 @@
 #prev-guesses {
     /* width: 300px; */
     margin: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 #prev-guesses div {
@@ -65,7 +92,11 @@
     height: 30px;
     display: inline-block;
     line-height: 30px;
-    border: solid 1px black;
+    border: solid 1px lime;
+}
+
+.counter {
+    color: lime;
 }
 
 /* Game Function Styles */
@@ -75,11 +106,11 @@
 }
 
 .not-guessed {
-    color: black;
+    color: lime;
 }
 
 .guessed {
-    background: red;
+    background: lime;
     color: black;
     font-weight: bold;
 }
