@@ -7,6 +7,7 @@ let guess;
 let invalidGuess;
 let t0;
 let t1;
+let tNow;
 let speed = 25; //time in ms between typewriter characters
 let typewriterID;
 let allPrompts = {
@@ -20,6 +21,7 @@ const guessInput = document.getElementById("guess-input");
 const submitBtn = document.getElementById("guess-submit");
 const prevGuesses = document.getElementById("prev-guesses");
 const speechBox = document.getElementById("speech-box");
+const counter = document.getElementById("counter");
 
 for ( let i = 1; i <= upper; i ++ ) {
     div = document.createElement("div");
@@ -78,10 +80,24 @@ const guessTracker = () =>{
     }
 }
 
+const counterUpdate = () => {
+    if ( attempts !== 0 ) {
+        tNow = Date.now();
+        let tDiff = tNow - t0;
+        let seconds = Math.floor(tDiff/1000);
+        // let hundredths = Math.floor((tDiff - (seconds * 100))/10).toFixed(3);
+        let minutes = Math.floor(seconds/60);
+        counter.innerHTML = minutes + "m:" + seconds + "s";
+    }
+}
+
+const counterID = window.setInterval(counterUpdate, 100);
+
 const checkAnswer = () => {
     guessTracker();
     if ( guess === randomNumber ) {
         t1 = Date.now();
+        clearInterval(counterID);
         console.log(t1);
         correctGuess = true;
         guessInput.disabled = true;
