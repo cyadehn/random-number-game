@@ -10,7 +10,7 @@ let t1 = 0;
 let speed = 25; //time in ms between typewriter characters
 let typewriterID;
 let allPrompts = {
-    start: `> Hey, guess a number between 1 and ${upper}!`,
+    start: `> Hi, there! Type below to guess a number between 1 and ${upper}!`,
     wrongGuess: `> Hm. That wasn't it, huh? Just keep guessing! What's another number between 1 and ${upper}?`,
     invalidGuess: `> ...that doesn't look like a number between 1 and ${upper}... That's okay! Take a breather and then you're sure to get it!`,
     correct: ""
