@@ -11,6 +11,7 @@ let tNow;
 let speed = 25; //time in ms between typewriter characters
 let typewriterID;
 let allPrompts = {
+    heading: `> ##Let's Make Random Numbers!##`,
     start: `> Hi, there! Type below to guess a number between 1 and ${upper}!`,
     wrongGuess: `> Hm. That wasn't it, huh? Just keep guessing! What's another number between 1 and ${upper}?`,
     invalidGuess: `> ...that doesn't look like a number between 1 and ${upper}... That's okay! Take a breather and then you're sure to get it!`,
@@ -40,7 +41,6 @@ const tSec = (end, start) => {
 }
 
 const prompt = () => {
-    
     /* Clear previous message */
     speechBox.innerHTML = "";
 
@@ -98,7 +98,6 @@ const checkAnswer = () => {
     if ( guess === randomNumber ) {
         t1 = Date.now();
         clearInterval(counterID);
-        console.log(t1);
         correctGuess = true;
         guessInput.disabled = true;
         endGame();
@@ -118,8 +117,8 @@ guessInput.addEventListener("input", () => {
 });
 
 guessInput.addEventListener("keyup", (e) => {
+    e.preventDefault();
     if ( e.keyCode === 13 ) {
-        e.preventDefault();
         document.querySelector("#guess-submit").click();
     }
 });
@@ -128,7 +127,6 @@ submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if ( attempts === 0 ) {
         t0 = Date.now();
-        console.log(t0);
     }
     attempts += 1;
     clearTimeout(typewriterID);
