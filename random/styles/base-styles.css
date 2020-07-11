@@ -63,14 +63,28 @@ body > header {
 #prev-guesses div {
     width: 30px;
     height: 30px;
-    background: black;
-    color: white;
     display: inline-block;
     line-height: 30px;
+    border: solid 1px black;
 }
 
 /* Game Function Styles */
 
 .inactive {
     display: none;
+}
+
+.not-guessed {
+    color: black;
+}
+
+.guessed {
+    background: red;
+    color: black;
+    font-weight: bold;
+}
+
+.correct {
+    background: lime;
+    font-weight: bold;
 }
