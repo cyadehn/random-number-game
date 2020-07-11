@@ -6,9 +6,15 @@ let attempts = 0;
 let guess;
 let t0 = 0;
 let t1 = 0;
-let message;
-let speed = 100;
+let speed = 25; //time in ms between typewriter characters
 let typewriterID;
+let allPrompts = {
+    start: `> Hey, guess a number between 1 and ${upper}!`,
+    wrongGuess: `> Hm. That wasn't it, huh? Just keep guessing! What's another number between 1 and ${upper}?`,
+    correct: `> There you go! You guessed correctly!<br>The number was <strong>${randomNumber}</strong>, and it took you ${attempts} tries and ${tSec(t1, t0)} seconds to get it.`
+}
+let speech;
+
 const guessInput = document.getElementById("guess-input");
 const submitBtn = document.getElementById("guess-submit");
 const prevGuesses = document.getElementById("prev-guesses");
@@ -22,7 +28,7 @@ for ( let i = 0; i < upper; i ++ ) {
 
 let guessGrid = Array.from(document.querySelectorAll("#prev-guesses div"));
 
-const tSec = (end, start) => {
+function tSec(end, start) {
     let timeDiff = end - start;
     timeDiff /= 1000;
     let tSec = Math.round(timeDiff);
@@ -38,8 +44,8 @@ const prompt = () => {
 
     const typewriter = () => {
         typewriterID = setTimeout(typewriter, speed);
-        if ( i < message.length ) {
-            speechBox.innerHTML += message.charAt(i);
+        if ( i < speech.length ) {
+            speechBox.innerHTML += speech.charAt(i);
             i += 1;
             console.log(i);
         } else {
@@ -49,11 +55,11 @@ const prompt = () => {
     }
     
     if ( attempts === 0 ) {
-        message = `Hey, guess a number between 1 and ${upper}!`;
+        speech = allPrompts.start;
     } else if ( !correctGuess ) {
-        message = `Hm. That wasn't it, huh? Just keep guessing! What's another number between 1 and ${upper}?`;
+        speech = allPrompts.wrongGuess;
     } else {
-        message = `There you go! You guessed correctly!<br>The number was <strong>${randomNumber}</strong>, and it took you ${attempts} tries and ${tSec(t1, t0)} seconds to get it.`;
+        speech = allPrompts.correct;
     }
     typewriter();
 }
