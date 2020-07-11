@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-body > header {
+.container header {
     text-align: center;
     padding: 10px;
 }
