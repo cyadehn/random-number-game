@@ -5,8 +5,8 @@ let correctGuess = false;
 let attempts = 0;
 let guess;
 let invalidGuess;
-let t0 = 0;
-let t1 = 0;
+let t0;
+let t1;
 let speed = 25; //time in ms between typewriter characters
 let typewriterID;
 let allPrompts = {
@@ -30,10 +30,10 @@ for ( let i = 1; i <= upper; i ++ ) {
 
 let guessGrid = Array.from(document.querySelectorAll("#prev-guesses div"));
 
-function tSec(end, start) {
+const tSec = (end, start) => {
     let timeDiff = end - start;
     timeDiff /= 1000;
-    let tSec = Math.round(timeDiff);
+    let tSec = timeDiff.toFixed(2);
     return tSec;
 }
 
@@ -52,7 +52,6 @@ const prompt = () => {
             i += 1;
         } else {
              clearTimeout(typewriterID);
-             console.log("typewriter end");
          }
     }
     
@@ -81,23 +80,17 @@ const guessTracker = () =>{
 
 const checkAnswer = () => {
     guessTracker();
-    if ( attempts === 0 ) {
-        t0 = Date.now();
-    }
     if ( guess === randomNumber ) {
         t1 = Date.now();
+        console.log(t1);
         correctGuess = true;
         guessInput.disabled = true;
         endGame();
     }
-    prompt();
 }
-
-
 
 const endGame = () => {
     let remainder = guessGrid.filter( item => item.classList.contains("not-guessed"));
-    console.log(remainder);
     remainder.forEach( item => item.classList.remove("not-guessed") );
     remainder.forEach( item => item.classList.add("guessed") );
 }
@@ -106,7 +99,6 @@ const endGame = () => {
 
 guessInput.addEventListener("input", () => {
   guess = parseInt(guessInput.value);
-  console.log(guess);
 });
 
 guessInput.addEventListener("keyup", (e) => {
@@ -118,12 +110,16 @@ guessInput.addEventListener("keyup", (e) => {
 
 submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    console.log("click");
-    clearTimeout(typewriterID);
+    if ( attempts === 0 ) {
+        t0 = Date.now();
+        console.log(t0);
+    }
     attempts += 1;
+    clearTimeout(typewriterID);
     guess = parseInt(guessInput.value);
     if ( guess > 0 && guess <= upper ) {
         checkAnswer();
+        prompt();
     } else {
         invalidGuess = true;
         prompt();
