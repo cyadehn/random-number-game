@@ -80,21 +80,6 @@ const checkAnswer = () => {
     prompt();
 }
 
-// if ( parseInt(guess) === randomNumber ) {
-//     t1 = Date.now();
-//     document.write(message());
-// } else {
-//     do {
-//     guess = prompt();
-//     attempts += 1;
-//     if (parseInt(guess) === randomNumber ) {
-//         correctGuess = true;
-//     }
-//     } while ( ! correctGuess )
-//     t1 = Date.now();
-//     document.write(message());
-// }
-
 /* User Interaction */
 
 guessInput.addEventListener("input", () => {
