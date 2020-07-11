@@ -4,6 +4,7 @@ let randomNumber = getRandomNumber(upper);
 let correctGuess = false;
 let attempts = 0;
 let guess;
+let invalidGuess;
 let t0 = 0;
 let t1 = 0;
 let speed = 25; //time in ms between typewriter characters
@@ -11,18 +12,19 @@ let typewriterID;
 let allPrompts = {
     start: `> Hey, guess a number between 1 and ${upper}!`,
     wrongGuess: `> Hm. That wasn't it, huh? Just keep guessing! What's another number between 1 and ${upper}?`,
-    correct: `> There you go! You guessed correctly!<br>The number was <strong>${randomNumber}</strong>, and it took you ${attempts} tries and ${tSec(t1, t0)} seconds to get it.`
+    invalidGuess: `> ...that doesn't look like a number between 1 and ${upper}... That's okay! Take a breather and then you're sure to get it!`,
+    correct: ""
 }
-let speech;
 
 const guessInput = document.getElementById("guess-input");
 const submitBtn = document.getElementById("guess-submit");
 const prevGuesses = document.getElementById("prev-guesses");
 const speechBox = document.getElementById("speech-box");
 
-for ( let i = 0; i < upper; i ++ ) {
+for ( let i = 1; i <= upper; i ++ ) {
     div = document.createElement("div");
-    div.innerHTML = `${i + 1}`
+    div.innerHTML = i;
+    div.classList.add(i, "not-guessed");
     prevGuesses.appendChild(div);
 }
 
@@ -41,43 +43,52 @@ const prompt = () => {
     speechBox.innerHTML = "";
 
     let i = 0;
+    let speech;
 
     const typewriter = () => {
         typewriterID = setTimeout(typewriter, speed);
         if ( i < speech.length ) {
             speechBox.innerHTML += speech.charAt(i);
             i += 1;
-            console.log(i);
         } else {
              clearTimeout(typewriterID);
-             console.log("end");
+             console.log("typewriter end");
          }
     }
     
     if ( attempts === 0 ) {
         speech = allPrompts.start;
+    } else if ( invalidGuess ) {
+        speech = allPrompts.invalidGuess;
     } else if ( !correctGuess ) {
         speech = allPrompts.wrongGuess;
     } else {
+        allPrompts.correct = `> There you go! You guessed correctly! The number was ${randomNumber}, and it took you ${attempts} tries and ${tSec(t1, t0)} seconds to get it.`;
         speech = allPrompts.correct;
     }
     typewriter();
 }
 
 const checkAnswer = () => {
-    clearTimeout(typewriterID);
     if ( attempts === 0 ) {
         t0 = Date.now();
     }
-    guess = guessInput.value;
-    attempts += 1;
-    
-    if ( parseInt(guess) === randomNumber ) {
+    if ( guess === randomNumber ) {
         t1 = Date.now();
         correctGuess = true;
         guessInput.disabled = true;
     }
     prompt();
+}
+
+const guessTracker = () =>{
+    guessDiv = guessGrid[guess - 1];
+    guessDiv.classList.remove("not-guessed");
+    if ( guess === randomNumber ) {
+        guessDiv.classList.add("correct");
+    } else {
+        guessDiv.classList.add("guessed");
+    }
 }
 
 /* User Interaction */
@@ -95,8 +106,19 @@ guessInput.addEventListener("keyup", (e) => {
 });
 
 submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     console.log("click");
-    checkAnswer();
+    clearTimeout(typewriterID);
+    attempts += 1;
+    guess = parseInt(guessInput.value);
+    if ( guess > 0 && guess <= randomNumber ) {
+        checkAnswer();
+        guessTracker();
+    } else {
+        invalidGuess = true;
+        prompt();
+        invalidGuess = false;
+    }
     guessInput.value = "";
 });
 
