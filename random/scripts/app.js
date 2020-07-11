@@ -122,7 +122,7 @@ submitBtn.addEventListener("click", (e) => {
     clearTimeout(typewriterID);
     attempts += 1;
     guess = parseInt(guessInput.value);
-    if ( guess > 0 && guess <= randomNumber ) {
+    if ( guess > 0 && guess <= upper ) {
         checkAnswer();
     } else {
         invalidGuess = true;
