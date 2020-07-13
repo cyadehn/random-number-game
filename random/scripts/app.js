@@ -144,6 +144,7 @@ submitBtn.addEventListener("click", (e) => {
 
 window.addEventListener("load", () => {
     prompt();
+    guessInput.focus();
 });
 
 
