@@ -17,7 +17,11 @@ let allPrompts = {
     invalidGuess: `> ...that doesn't look like a number between 1 and ${upper}... That's okay! Take a breather and then you're sure to get it!`,
     correct: ""
 }
+let firstGameOver = false;
+let glitchID;
+let glitchInterval = 1000;
 
+const app = document.querySelector(".app-demo");
 const guessInput = document.getElementById("guess-input");
 const submitBtn = document.getElementById("guess-submit");
 const prevGuesses = document.getElementById("prev-guesses");
@@ -27,7 +31,7 @@ const counter = document.getElementById("counter");
 for ( let i = 1; i <= upper; i ++ ) {
     div = document.createElement("div");
     div.innerHTML = i;
-    div.classList.add(i, "not-guessed");
+    div.classList.add(i, "not-guessed", "inherit");
     prevGuesses.appendChild(div);
 }
 
@@ -104,10 +108,27 @@ const checkAnswer = () => {
     }
 }
 
+const glitch = () => {
+    if ( app.classList.contains("glitch") ) {
+        app.classList.remove("glitch");
+        console.log("Glitch removed!");
+    } else {
+        app.classList.add("glitch");
+        console.log("Glitch added!");
+        glitchInterval -= 50;
+        console.log(glitchInterval);
+    }
+    if ( glitchInterval ) {
+        glitchID = setTimeout(glitch, glitchInterval);
+    }
+}
+
 const endGame = () => {
     let remainder = guessGrid.filter( item => item.classList.contains("not-guessed"));
     remainder.forEach( item => item.classList.remove("not-guessed") );
     remainder.forEach( item => item.classList.add("guessed") );
+    console.log("First game has ended");
+    glitch();
 }
 
 /* User Interaction */
