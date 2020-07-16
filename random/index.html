@@ -13,21 +13,20 @@
             <span><a href="..">Return to Main Page</a></span>
         </header>
         <main class="app-demo">
-            <section class="game-start">
-                <div class="basic-game">
+            <section class="game-start inherit">
+                <div class="basic-game inherit">
                     <!-- <header>
                         <h1>Let's Make <br> Random Numbers!</h1>
                     </header> -->
-                    <p class="speech-box" id="speech-box"></p>
-                    <p class="counter">Counter: <span id="counter"></span></p>
-                    <div id="user-input">
-                        <input type="number" id="guess-input">
-                        <button type="submit" id="guess-submit">>>></button>
+                    <p class="speech-box inherit" id="speech-box"></p>
+                    <p class="counter inherit">Counter: <span id="counter"></span></p>
+                    <div class="inherit" id="user-input">
+                        <input class="inherit" type="number" id="guess-input">
+                        <button class="inherit" type="submit" id="guess-submit">>>></button>
                     </div>
-                    <div id="prev-guesses">
+                    <div class="inherit" id="prev-guesses">
                         <p>Previous Guesses:</p>
                     </div>
-                    <script src="./scripts/app.js"></script>
                 </div>
             </section>
             <section class="main-game">
@@ -35,5 +34,7 @@
             </section>
         </main>
     </div>
+    <script src="./scripts/game-start.js"></script>
+    <script src="./scripts/main-game.js"></script>
 </body>
 </html>
