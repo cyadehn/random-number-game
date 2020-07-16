@@ -118,12 +118,12 @@ const glitch = () => {
         repeat = glitchRepeat;
         glitchStarted = false;
     }
-    if ( app.classList.contains("glitch") ) {
-        app.classList.remove("glitch");
-        console.log("Glitch removed!");
-    } else {
+    if ( !app.classList.contains("glitch") && repeat ) {
         app.classList.add("glitch");
         console.log("Glitch added!");
+    } else {
+        app.classList.remove("glitch");
+        console.log("Glitch removed!");
     }
     if ( interval >= 250 ) {
         interval -= 50;
