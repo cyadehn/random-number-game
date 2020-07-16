@@ -46,7 +46,6 @@ body {
     width: 95%;
     height: 97%;
     background: black;
-    color: inherit;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -57,7 +56,6 @@ body {
     text-align: center;
     position: relative;
     height: 100%;
-    color: inherit;
 }
 
 #user-input {
@@ -89,7 +87,6 @@ body {
     min-height: 110px;
     margin: 0 auto;
     padding: 15px;
-    color: inherit;
     text-align: left;
 }
 
@@ -101,17 +98,12 @@ body {
     left: 0;
 }
 
-#prev-guesses {
-    color: inherit;
-}
-
 #prev-guesses div {
     width: 30px;
     height: 30px;
     display: inline-block;
     line-height: 30px;
     border: solid 1px lime;
-    color: inherit;
 }
 
 /* Game Function Styles */

@@ -20,6 +20,10 @@ let allPrompts = {
 let firstGameOver = false;
 let glitchID;
 let glitchInterval = 1000;
+let glitchRepeat = 20;
+let interval;
+let repeat;
+let glitchStarted;
 
 const app = document.querySelector(".app-demo");
 const guessInput = document.getElementById("guess-input");
@@ -31,7 +35,7 @@ const counter = document.getElementById("counter");
 for ( let i = 1; i <= upper; i ++ ) {
     div = document.createElement("div");
     div.innerHTML = i;
-    div.classList.add(i, "not-guessed", "inherit");
+    div.classList.add(i, "not-guessed");
     prevGuesses.appendChild(div);
 }
 
@@ -109,18 +113,33 @@ const checkAnswer = () => {
 }
 
 const glitch = () => {
+    if (glitchStarted) {
+        interval = glitchInterval;
+        repeat = glitchRepeat;
+        glitchStarted = false;
+    }
     if ( app.classList.contains("glitch") ) {
         app.classList.remove("glitch");
         console.log("Glitch removed!");
     } else {
         app.classList.add("glitch");
         console.log("Glitch added!");
-        glitchInterval -= 50;
-        console.log(glitchInterval);
     }
-    if ( glitchInterval ) {
-        glitchID = setTimeout(glitch, glitchInterval);
+    if ( interval >= 250 ) {
+        interval -= 50;
+        console.log(interval);
+        glitchID = setTimeout(glitch, interval);
+        console.log("glitch increase");
+    } else if ( repeat ) {
+        glitchID = setTimeout(glitch, interval);
+        repeat -= 1;
+        console.log("glitch repeat");
     }
+}
+
+const glitchStart = () => {
+    glitchStarted = true;
+    glitch();
 }
 
 const endGame = () => {
@@ -128,7 +147,7 @@ const endGame = () => {
     remainder.forEach( item => item.classList.remove("not-guessed") );
     remainder.forEach( item => item.classList.add("guessed") );
     console.log("First game has ended");
-    glitch();
+    glitchStart();
 }
 
 /* User Interaction */
