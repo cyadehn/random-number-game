@@ -15,7 +15,7 @@ const glitchTypewriter = (array, domVar) => {
                 printLineID = setTimeout(printLine, glitchSpeed);
             }
         } else if ( index < array.length ) {
-            domVar.innerHTML += "<br>";
+            domVar.innerHTML = "";
             index += 1;
             lineIndex = 0;
             glitchTypewriter(text, speechBox);
