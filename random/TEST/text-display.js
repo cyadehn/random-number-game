@@ -376,7 +376,7 @@ const text = [
 const speechBox = document.getElementById("speechBox");
 let glitchTypewriterID;
 let printLineID;
-let glitchSpeed = 50;
+let glitchSpeed = 5;
 
 // text.forEach((x) => {
 //     speechBox.innerHTML += x;
@@ -413,12 +413,14 @@ let index = 0;
 let lineIndex = 0;
 const glitchTypewriter = (array, domVar) => {
     const printLine = () => {
-        if ( array[index] && lineIndex < array[index].length ) {
-            domVar.innerHTML += array[index].charAt(lineIndex);
-            lineIndex += 1;
-            console.log("line index increased to " + lineIndex);
-            printLineID = setTimeout(printLine, glitchSpeed);
-        } else if ( array[index] ) {
+        if ( lineIndex < array[index].length ) {
+            if ( array[index]) {
+                domVar.innerHTML += array[index].charAt(lineIndex);
+                lineIndex += 1;
+                console.log("line index increased to " + lineIndex);
+                printLineID = setTimeout(printLine, glitchSpeed);
+            }
+        } else if ( index < array.length ) {
             domVar.innerHTML += "<br>";
             index += 1;
             lineIndex = 0;
