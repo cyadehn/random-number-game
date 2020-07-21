@@ -1,68 +1,80 @@
-let glitchTypewriterID;
-let printLineID;
-let glitchSpeed = 4;
-let index = 0;
-let lineIndex = 0;
-let speed = 25; //time in ms between typewriter characters
-let typewriterID;
+let currentScene = scene1;
 
-const glitchTypewriter = (array, domVar) => {
+//scene.dialogue must contain an array
+const glitchType = (scene) => {
+
+    //Configure glitch function speed
+    let glitchSpeed = 4;
+    //Configure target HTML element
+    let target = appWindow.speechBox;
+
+    let dialogue = scene.dialogue;
+    let glitchTypeID;
+    let arrayIndex = 0;
+    let lineIndex = 0;
+
     const printLine = () => {
-        if ( lineIndex < array[index].length ) {
-            if ( array[index]) {
-                domVar.innerHTML += array[index].charAt(lineIndex);
+        if ( lineIndex < dialogue[arrayIndex].length ) {
+            if ( dialogue[arrayIndex]) {
+                target.innerHTML += dialogue[arrayIndex].charAt(lineIndex);
                 lineIndex += 1;
                 console.log("line index increased to " + lineIndex);
-                printLineID = setTimeout(printLine, glitchSpeed);
+                glitchTypeID = setTimeout(printLine, glitchSpeed);
             }
-        } else if ( index < array.length ) {
+        } else if ( index < dialogue.length ) {
             domVar.innerHTML = "";
             index += 1;
             lineIndex = 0;
-            glitchTypewriter(text, speechBox);
+            printLine();
             console.log("restart");
         }
     }
     printLine();
 }
-glitchTypewriter(text, speechBox);
 
-const prompt = () => {
-    /* Clear previous message */
-    speechBox.innerHTML = "";
+const typeResponse = (scene) => {
+    
+    //Configure typewriter function speed
+    let speed = 25;
+    //Configure target HTML element & clear previous message
+    let target = appWindow.speechBox;
+    target.innerHTML = "";
+    
+    let dialogue = scene.dialogue;
+    let response;
 
+    //Sets response according to checkAnswer result
+    if ( scene.attempts === 0 ) {
+        response = dialogue.intro;
+    } else if ( invalidGuess ) {
+        response = dialogue.invalid;
+    } else if ( !correctGuess ) {
+        response = dialogue.incorrect;
+    } else {
+        response = dialogue.correct;
+    }
+
+    let typewriterID;
     let i = 0;
-    let speech;
 
-    const typewriter = () => {
+    const typewriter = (text) => {
         typewriterID = setTimeout(typewriter, speed);
-        if ( i < speech.length ) {
-            speechBox.innerHTML += speech.charAt(i);
+        if ( i < text.length ) {
+            speechBox.innerHTML += text.charAt(i);
             i += 1;
         } else {
              clearTimeout(typewriterID);
          }
     }
-    
-    if ( attempts === 0 ) {
-        speech = allPrompts.start;
-    } else if ( invalidGuess ) {
-        speech = allPrompts.invalidGuess;
-    } else if ( !correctGuess ) {
-        speech = allPrompts.wrongGuess;
-    } else {
-        allPrompts.correct = `> There you go! You guessed correctly! The number was ${randomNumber}, and it took you ${attempts} tries and ${tSec(t1, t0)} seconds to get it.`;
-        speech = allPrompts.correct;
-    }
-    typewriter();
+    typewriter(response);
 }
 
-const typewriter = ( mode, scene ) => {
-    if ( mode = char ) {
-
+const typewriter = ( scene ) => {
+    if ( scene.type == "game" ) {
+        typeResponse(scene);
     }
-    if ( mode = line ) {
-
+    if ( scene.type == "line" ) {
+        glitchType(scene);
     }
 }
 
@@ -177,6 +189,25 @@ let correctGuess = false;
 let guess;
 let invalidGuess;
 let firstGameOver = false;
+
+const submit = (e) => {
+    e.preventDefault();
+    if ( attempts === 0 ) {
+        t0 = Date.now();
+    }
+    attempts += 1;
+    clearTimeout(typewriterID);
+    guess = parseInt(guessInput.value);
+    if ( guess > 0 && guess <= upper ) {
+        checkAnswer();
+        prompt();
+    } else {
+        invalidGuess = true;
+        prompt();
+        invalidGuess = false;
+    }
+    guessInput.value = "";
+}
 
 const checkAnswer = () => {
     guessTracker();
