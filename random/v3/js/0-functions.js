@@ -83,6 +83,30 @@ const tSec = ( scene ) => {
     let timeDiff = end - start;
     timeDiff /= 1000;
     let tSec = timeDiff.toFixed(2);
-    playerScore.time[sceneIndex + 1] = tSec;
+    playerScore.time[sceneIndex] = tSec;
 }
 
+const updateScore = () => {
+    tSec();
+    playerScore.attempts[sceneIndex] = currentScene.attempts;
+}
+
+const guessTracker = () =>{
+    target = currentScene.guessGrid;
+    guessDiv = guessGrid[guess - 1];
+    guessDiv.classList.remove("not-guessed");
+    if ( guess === randomNumber ) {
+        guessDiv.classList.add("correct");
+    } else {
+        guessDiv.classList.add("guessed");
+    }
+}
+
+const counterUpdate = () => {
+    let tDiff = Date.now() - t0;
+    let seconds = Math.floor(tDiff/1000);
+    // let hundredths = Math.floor((tDiff - (seconds * 100))/10).toFixed(3);
+    let minutes = Math.floor(seconds/60);
+    let target = appWindow.counter;
+    target.innerHTML = minutes + "m:" + seconds + "s";
+}

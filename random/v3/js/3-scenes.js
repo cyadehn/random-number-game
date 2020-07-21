@@ -1,20 +1,23 @@
 const getRandomNumber = (scene) => Math.floor(Math.random() * scene.upper) + 1;
 
 const guessArray = (scene) => {
-    scene.randomNumber
-    scene.guesses = makeArray();
-    for ( let i = 0; i < scene.randomNumber; i ++ ) {
-        scene.guesses.push( i + 1 );
+    let array = [];
+    for ( let i = 0; i < scene.upper; i ++ ) {
+        array.push( i + 1 );
     }
+    return array;
 }
 
-for ( let i = 1; i <= upper; i ++ ) {
-    div = document.createElement("div");
-    div.innerHTML = i;
-    div.classList.add(i, "not-guessed");
-    prevGuesses.appendChild(div);
+const gridArray = (scene) => {
+    let array = [];
+    for ( let i = 1; i <= scene.upper; i ++ ) {
+        div = document.createElement("div");
+        div.innerHTML = i;
+        div.classList.add(i, "not-guessed");
+        array.push(div);
+    }
+    return array;
 }
-let guessGrid = Array.from(document.querySelectorAll("#prev-guesses div"));
 
 const gridArray = (scene) => {
     obj.randomNumber
@@ -41,8 +44,8 @@ const scenes = [
         randomNumber: getRandomNumber(this.upper),
         numRange: getNumberRange(),
         attempts: 0,
-        guesses: guessArray(),
-        guessGrid: gridArray(),
+        guesses: guessArray(this),
+        guessGrid: gridArray(this),
         activeWindow: "start",
     },
     {

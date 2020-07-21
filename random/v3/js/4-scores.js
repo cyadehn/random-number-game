@@ -1,17 +1,9 @@
 let playerScore = {
-    time: [
-        stage1, stage2, ...
-    ],
-    attempts: [
-
-    ]
+    time: [],
+    attempts: []
 }
 
 let computerScore = {
-    time: [
-
-    ],
-    attempts: [
-        
-    ]
+    time: [],
+    attempts: []
 }
