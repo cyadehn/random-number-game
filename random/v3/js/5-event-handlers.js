@@ -12,24 +12,7 @@ guessInput.addEventListener("input", () => {
       }
   });
   
-  submitBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      if ( attempts === 0 ) {
-          t0 = Date.now();
-      }
-      attempts += 1;
-      clearTimeout(typewriterID);
-      guess = parseInt(guessInput.value);
-      if ( guess > 0 && guess <= upper ) {
-          checkAnswer();
-          prompt();
-      } else {
-          invalidGuess = true;
-          prompt();
-          invalidGuess = false;
-      }
-      guessInput.value = "";
-  });
+  submitBtn.addEventListener("click", submit(e));
   
   window.addEventListener("load", () => {
       prompt();
