@@ -1,3 +1,5 @@
+const getRandomNumber = (scene) => Math.floor(Math.random() * scene.upper) + 1;
+
 const guessArray = (scene) => {
     scene.randomNumber
     scene.guesses = makeArray();

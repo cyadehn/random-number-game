@@ -1,5 +1,3 @@
-const getRandomNumber = (scene) => Math.floor(Math.random() * scene.upper) + 1;
-
 let glitchTypewriterID;
 let printLineID;
 let glitchSpeed = 4;
