@@ -5,5 +5,6 @@ const appWindow = {
     counter: document.getElementById("counter"),
     commandLine: document.getElementById("user-input"),
     submit: document.getElementById("guess-input"),
-    displayGrid: document.getElementById("display-grid")
+    gridBtn: document.getElementById("display-grid"),
+    displayGrid: document.getElementById("grid")
 }
