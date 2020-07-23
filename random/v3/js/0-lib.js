@@ -78,8 +78,8 @@ const typewriter = ( scene ) => {
 }
 
 const tSec = ( scene ) => {
-    let start = scene.t0;
-    let end = scene.t1;
+    let start = currentScene.t0;
+    let end = currentScene.t1;
     let timeDiff = end - start;
     timeDiff /= 1000;
     let tSec = timeDiff.toFixed(2);
@@ -92,14 +92,29 @@ const updateScore = () => {
 }
 
 const guessTracker = () =>{
-    target = currentScene.guessGrid;
-    guessDiv = guessGrid[guess - 1];
+    let guessDiv = currentScene.guessGrid[guess - 1];
     guessDiv.classList.remove("not-guessed");
     if ( guess === randomNumber ) {
         guessDiv.classList.add("correct");
     } else {
         guessDiv.classList.add("guessed");
     }
+}
+
+const response = () => {
+    let response;
+    let dx = currentScene.dialogue;
+    if ( !guess > 0 || !guess <= currentScene.upper ) {
+        response = dx.invalid
+    } else if ( !currentScene.guessGrid[guess-1] ) {
+        response = dx.alreadyGuessed;
+    } else if ( guess != currentScene.randomNumber ) {
+        response = dx.incorrect;
+    } else {
+        response = dx.correct;
+        endGame();
+    }
+    return response;
 }
 
 const counterUpdate = () => {
