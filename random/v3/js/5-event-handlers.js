@@ -23,9 +23,6 @@ const displayGuesses = (e) => {
 }
 
 /* Event Listeners */
-gridBtn.addEventListener(onclick/Touch, displayGuesses());
-gridBtn.addEventListener(clickoff/lift, displayGuesses());
-
 appWindow.commandLine.addEventListener("input", () => {
     guess = parseInt(guessInput.value);
   });
@@ -39,12 +36,13 @@ appWindow.commandLine.addEventListener("keyup", (e) => {
   
   appWindow.submit.addEventListener("click", checkAnswer(e));
   
-  appWindow.displayGrid.addEventListener("mousedown", displayGuesses(e));
-  appWindow.displayGrid.addEventListener("mouseup", displayGuesses(e));
-  appWindow.displayGrid.addEventListener("touchstart", displayGuesses(e));
-  appWindow.displayGrid.addEventListener("touchend", displayGuesses(e));
+  appWindow.gridBtn.addEventListener("mousedown", displayGuesses(e));
+  appWindow.gridBtn.addEventListener("mouseup", displayGuesses(e));
+  appWindow.gridBtn.addEventListener("touchstart", displayGuesses(e));
+  appWindow.gridBtn.addEventListener("touchend", displayGuesses(e));
+  
   window.addEventListener("load", () => {
-      prompt();
+      initializeGame();
       guessInput.focus();
   });
   
