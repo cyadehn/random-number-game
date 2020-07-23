@@ -78,8 +78,8 @@ const typewriter = ( scene ) => {
 }
 
 const tSec = ( scene ) => {
-    let start = currentScene.t0;
-    let end = currentScene.t1;
+    let start = scene.t0;
+    let end = scene.t1;
     let timeDiff = end - start;
     timeDiff /= 1000;
     let tSec = timeDiff.toFixed(2);
@@ -87,7 +87,7 @@ const tSec = ( scene ) => {
 }
 
 const updateScore = () => {
-    tSec();
+    tSec( currentScene );
     playerScore.attempts[sceneIndex] = currentScene.attempts;
 }
 

@@ -1,22 +1,22 @@
 /* Event Handlers */
-const displayGuesses = (e) => {
+const displayGuesses = (event) => {
     const target = appWindow.displayGrid;
     target.setAttribute("style", "display: none");
     
-    if ( e.type == "mousedown" || e.type == "touchstart" ) {
+    if ( event.type == "mousedown" || event.type == "touchstart" ) {
         target.setAttribute("style", "");
         
         //Mobile unfocuses keyboard to reveal grid
-        if (e.type == "touchstart") {
+        if (event.type == "touchstart") {
             appWindow.commandLine.blur();
         }
     }
 
-    if ( e.type == "mouseup" || e.type == "touchend" ) {
+    if ( event.type == "mouseup" || event.type == "touchend" ) {
         target.setAttribute("style", "display: none")
         
         //Mobile refocuses on keyboard input
-        if (e.type == "touchend") {
+        if (event.type == "touchend") {
             appWindow.commandLine.focus();
         }
     }
@@ -34,15 +34,25 @@ appWindow.commandLine.addEventListener("keyup", (e) => {
       }
   });
   
-  appWindow.submit.addEventListener("click", checkAnswer(e));
+  appWindow.submit.addEventListener("click", (e) => {
+      checkAnswer(e);
+  });
   
-  appWindow.gridBtn.addEventListener("mousedown", displayGuesses(e));
-  appWindow.gridBtn.addEventListener("mouseup", displayGuesses(e));
-  appWindow.gridBtn.addEventListener("touchstart", displayGuesses(e));
-  appWindow.gridBtn.addEventListener("touchend", displayGuesses(e));
+  appWindow.gridBtn.addEventListener("mousedown", (e) => {
+    displayGuesses(e);
+  });
+  appWindow.gridBtn.addEventListener("mouseup", (e) => {
+    displayGuesses(e);
+  });
+  appWindow.gridBtn.addEventListener("touchstart", (e) => {
+    displayGuesses(e);
+  });
+  appWindow.gridBtn.addEventListener("touchend", (e) => {
+    displayGuesses(e);
+  });
   
   window.addEventListener("load", () => {
       initializeGame();
-      guessInput.focus();
+      appWindow.commandLine.focus();
   });
   

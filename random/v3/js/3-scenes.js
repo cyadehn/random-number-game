@@ -1,3 +1,6 @@
+let sceneIndex = 0;
+let currentScene;
+
 const getRandomNumber = (scene) => Math.floor(Math.random() * scene.upper) + 1;
 
 const guessArray = (scene) => {
@@ -14,7 +17,8 @@ const gridArray = (scene) => {
         div = document.createElement("div");
         div.innerHTML = i;
         div.classList.add(i, "not-guessed");
-        array.push(div);
+        array = array.push(div);
+        console.log(array);
     }
     return array;
 }
