@@ -67,6 +67,17 @@ const typeResponse = (scene) => {
     typewriter(response);
 }
 
+//combine two functions above into below
+const typewriter = ( scene ) => {
+    console.log("Typing message...")
+    if ( scene.type == "game" ) {
+        typeResponse(scene);
+    }
+    if ( scene.type == "line" ) {
+        glitchType(scene);
+    }
+}
+
 const getRandomNumber = (scene) => {
     // console.log("getRandomNumber has started");
     let num = 0;
@@ -97,17 +108,8 @@ const gridArray = (scene) => {
     return array;
 }
 
-//combine two functions above into below
-const typewriter = ( scene ) => {
-    if ( scene.type == "game" ) {
-        typeResponse(scene);
-    }
-    if ( scene.type == "line" ) {
-        glitchType(scene);
-    }
-}
-
 const tSec = ( scene ) => {
+    console.log("Calculating time elapsed...");
     let start = scene.t0;
     let end = scene.t1;
     let timeDiff = end - start;
@@ -117,14 +119,26 @@ const tSec = ( scene ) => {
 }
 
 const updateScore = () => {
+    console.log("Updating score...");
     tSec( currentScene );
     playerScore.attempts[sceneIndex] = currentScene.attempts;
 }
 
 const guessTracker = () =>{
-    let guessDiv = currentScene.gridArray[guess - 1];
-    console.log(guessDiv);
-    guessDiv.classList.remove("not-guessed");
+    
+    console.log(`Your guess is ${guess}, type: "${typeof guess}." Updating guesses...`);
+
+    //Remove from tracking array
+    if ( currentScene.notGuessed[guess-1] ) {
+        currentScene.notGuessed.splice( (
+            currentScene.notGuessed.indexOf(5)
+        ) , 1 );
+    }
+
+    //Update guessGrid classes
+    let guessDiv = currentScene.gridRef[guess - 1];
+    console.log("The div related to this guess is " + guessDiv + ".");
+    if (guessDivguessDiv.classList.remove("not-guessed"));
     if ( guess === randomNumber ) {
         guessDiv.classList.add("correct");
     } else {
@@ -135,9 +149,10 @@ const guessTracker = () =>{
 const response = () => {
     let response;
     let dx = currentScene.dialogue;
+    console.log("Determining response...");
     if ( !guess > 0 || !guess <= currentScene.upper ) {
         response = dx.invalid
-    } else if ( !currentScene.guesses[guess-1] ) {
+    } else if ( !currentScene.notGuessed[guess-1] ) {
         response = dx.alreadyGuessed;
     } else if ( guess != currentScene.randomNumber ) {
         response = dx.incorrect;
@@ -149,6 +164,7 @@ const response = () => {
 }
 
 const counterUpdate = () => {
+    console.log("tick");
     let tDiff = Date.now() - t0;
     let seconds = Math.floor(tDiff/1000);
     // let hundredths = Math.floor((tDiff - (seconds * 100))/10).toFixed(3);

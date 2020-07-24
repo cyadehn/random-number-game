@@ -11,11 +11,11 @@ const sceneInit = () => {
     appWindow.submit.disabled = false;
     //reset guess grid
     appWindow.guessGrid.innerHTML = "";
-    currentScene.gridArray.forEach( (x) => {
+    currentScene.gridRef.forEach( (x) => {
         appWindow.guessGrid.appendChild(x);
     });
-    currentScene.gridArray = Array.from(document.querySelectorAll("#guess-grid div"));
-    typewriter( dialogue.intro );
+    currentScene.gridRef = Array.from(document.querySelectorAll("#guess-grid div"));
+    typewriter( currentScene );
 
     console.log("Scene initialized!")
 }

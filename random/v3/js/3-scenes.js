@@ -401,7 +401,7 @@ const scenes = [
         upper: undefined,
         randomNumber: undefined,
         numRange: undefined,
-        guesses: undefined,
+        notGuessed: undefined,
         guessGrid: undefined,
         activeWindow: undefined
     }
@@ -411,8 +411,8 @@ const gameInit = () => {
     for ( let i = 0; i < scenes.length; i ++ ) {
         if ( scenes[i].type == "game" ) {
             scenes[i].randomNumber = getRandomNumber(scenes[i]);
-            scenes[i].guessTracker = guessArray(scenes[i]);
-            scenes[i].gridArray = gridArray(scenes[i]);
+            scenes[i].notGuessed = guessArray(scenes[i]);
+            scenes[i].gridRef = gridArray(scenes[i]);
         }
     }
     console.log("Game initialized!");
