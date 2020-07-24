@@ -26,8 +26,8 @@ const displayGuesses = (event) => {
   
 appWindow.commandLine.addEventListener("keyup", (e) => {
       if ( e.keyCode === 13 ) {
-          appWindow.submit.click();
           console.log("Command line is clicking submit...")
+          appWindow.submit.click();
       }
   });
   
