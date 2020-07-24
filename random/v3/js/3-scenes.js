@@ -1,10 +1,6 @@
 let sceneIndex = 0;
 let currentScene;
 
-
-
-
-
 const scenes = [
     {
         type: "game",
@@ -410,3 +406,14 @@ const scenes = [
         activeWindow: undefined
     }
 ]
+
+const gameInit = () => {
+    for ( let i = 0; i < scenes.length; i ++ ) {
+        if ( scenes[i].type == "game" ) {
+            scenes[i].randomNumber = getRandomNumber(scenes[i]);
+            scenes[i].guessTracker = guessArray(scenes[i]);
+            scenes[i].gridArray = gridArray(scenes[i]);
+        }
+    }
+    console.log("Game initialized!");
+}

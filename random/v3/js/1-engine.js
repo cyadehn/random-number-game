@@ -2,16 +2,6 @@ let counterID;
 let dialogue;
 let guess;
 
-const gameInit = () => {
-    for ( let i = 0; i < scenes.length; i ++ ) {
-        if ( scenes[i].type == "game" ) {
-            scenes[i].randomNumber = getRandomNumber(scenes[i]);
-            scenes[i].guessTracker = guessArray(scenes[i]);
-            console.log(scenes[i].guessTracker);
-        }
-    }
-}
-
 const sceneInit = () => {
 
     currentScene = scenes[sceneIndex];
@@ -21,14 +11,19 @@ const sceneInit = () => {
     appWindow.submit.disabled = false;
     //reset guess grid
     appWindow.guessGrid.innerHTML = "";
-    currentScene.guessGrid.forEach( (x) => {
+    currentScene.gridArray.forEach( (x) => {
         appWindow.guessGrid.appendChild(x);
     });
-    currentScene.guessGrid = Array.from(document.querySelectorAll("#guess-grid div"));
+    currentScene.gridArray = Array.from(document.querySelectorAll("#guess-grid div"));
     typewriter( dialogue.intro );
+
+    console.log("Scene initialized!")
 }
 
 const checkAnswer = (e) => {
+
+    console.log("Checking answer...");
+
     e.preventDefault();
 
     if ( currentScene.attempts === 0 ) {

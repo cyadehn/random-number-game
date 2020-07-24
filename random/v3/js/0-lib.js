@@ -82,7 +82,6 @@ const guessArray = (scene) => {
     let array = [];
     for ( let i = 0; i < scene.upper; i ++ ) {
         array.push( i + 1 );
-        console.log("array push");
     }
     return array;
 }
@@ -90,11 +89,10 @@ const guessArray = (scene) => {
 const gridArray = (scene) => {
     let array = [];
     for ( let i = 1; i <= scene.upper; i ++ ) {
-        div = document.createElement("div");
+        let div = document.createElement("div");
         div.innerHTML = i;
         div.classList.add(i, "not-guessed");
-        array = array.push(div);
-        console.log(array);
+        array.push(div);
     }
     return array;
 }
@@ -124,7 +122,8 @@ const updateScore = () => {
 }
 
 const guessTracker = () =>{
-    let guessDiv = currentScene.guessGrid[guess - 1];
+    let guessDiv = currentScene.gridArray[guess - 1];
+    console.log(guessDiv);
     guessDiv.classList.remove("not-guessed");
     if ( guess === randomNumber ) {
         guessDiv.classList.add("correct");
