@@ -8,3 +8,7 @@ Design a landing page before entering with basic information about yourself */
     background-color: red;
     color: white;
 }
+
+.correct {
+    background-color: lime;
+}
