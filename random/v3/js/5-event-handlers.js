@@ -52,7 +52,8 @@ appWindow.commandLine.addEventListener("keyup", (e) => {
   });
   
   window.addEventListener("load", () => {
-      initializeGame();
+      gameInit();
+      sceneInit();
       appWindow.commandLine.focus();
   });
   

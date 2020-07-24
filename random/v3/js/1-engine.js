@@ -2,7 +2,18 @@ let counterID;
 let dialogue;
 let guess;
 
-const initializeGame = () => {
+const gameInit = () => {
+    for ( let i = 0; i < scenes.length; i ++ ) {
+        if ( scenes[i].type == "game" ) {
+            scenes[i].randomNumber = getRandomNumber(scenes[i]);
+            scenes[i].guessTracker = guessArray(scenes[i]);
+            console.log(scenes[i].guessTracker);
+        }
+    }
+}
+
+const sceneInit = () => {
+
     currentScene = scenes[sceneIndex];
     dialogue = currentScene.dialogue;
     
@@ -46,7 +57,7 @@ const endGame = () => {
     remainder.forEach( item => item.classList.add("guessed") );
     
     if ( currentScene.type == "game" ) {
-        initializeGame(currentScene);
+        sceneInit(currentScene);
     }
     if ( currentScene.type == "glitch" || "cutscene" ) {
         glitch();

@@ -1,27 +1,9 @@
 let sceneIndex = 0;
 let currentScene;
 
-const getRandomNumber = (scene) => Math.floor(Math.random() * scene.upper) + 1;
 
-const guessArray = (scene) => {
-    let array = [];
-    for ( let i = 0; i < scene.upper; i ++ ) {
-        array.push( i + 1 );
-    }
-    return array;
-}
 
-const gridArray = (scene) => {
-    let array = [];
-    for ( let i = 1; i <= scene.upper; i ++ ) {
-        div = document.createElement("div");
-        div.innerHTML = i;
-        div.classList.add(i, "not-guessed");
-        array = array.push(div);
-        console.log(array);
-    }
-    return array;
-}
+
 
 const scenes = [
     {
@@ -29,11 +11,11 @@ const scenes = [
         name: "game-start",
         activeWindow: "start",
         upper: 20,
-        randomNumber: getRandomNumber(this),
+        // randomNumber: getRandomNumber(this),
         // numRange: getNumberRange(),
         attempts: 0,
-        guesses: guessArray(this),
-        guessGrid: gridArray(this),
+        // guesses: guessArray(this),
+        // guessGrid: gridArray(this),
         dialogue: {
             intro: `> Hi, there! Think you can beat me at a game? Let's see... Type below to guess a number between 1 and ${this.upper}!`,
             incorrect: `> Hm. That wasn't it, huh? Just keep guessing! What's another number between 1 and ${this.upper}?`,

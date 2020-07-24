@@ -67,6 +67,38 @@ const typeResponse = (scene) => {
     typewriter(response);
 }
 
+const getRandomNumber = (scene) => {
+    // console.log("getRandomNumber has started");
+    let num = 0;
+    // console.log(`The type of num is ${typeof num}!`);
+    // console.log(`The upper number is ${scene.upper} and its type is ${typeof scene.upper}`);
+    num = Math.floor(Math.random() * scene.upper) + 1;
+    // console.log(`The type of num is ${typeof num}!`);
+    // console.log(num);
+    return num;
+}
+
+const guessArray = (scene) => {
+    let array = [];
+    for ( let i = 0; i < scene.upper; i ++ ) {
+        array.push( i + 1 );
+        console.log("array push");
+    }
+    return array;
+}
+
+const gridArray = (scene) => {
+    let array = [];
+    for ( let i = 1; i <= scene.upper; i ++ ) {
+        div = document.createElement("div");
+        div.innerHTML = i;
+        div.classList.add(i, "not-guessed");
+        array = array.push(div);
+        console.log(array);
+    }
+    return array;
+}
+
 //combine two functions above into below
 const typewriter = ( scene ) => {
     if ( scene.type == "game" ) {
@@ -106,7 +138,7 @@ const response = () => {
     let dx = currentScene.dialogue;
     if ( !guess > 0 || !guess <= currentScene.upper ) {
         response = dx.invalid
-    } else if ( !currentScene.guessGrid[guess-1] ) {
+    } else if ( !currentScene.guesses[guess-1] ) {
         response = dx.alreadyGuessed;
     } else if ( guess != currentScene.randomNumber ) {
         response = dx.incorrect;
