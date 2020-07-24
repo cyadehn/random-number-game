@@ -23,19 +23,17 @@ const displayGuesses = (event) => {
 }
 
 /* Event Listeners */
-appWindow.commandLine.addEventListener("input", () => {
-    guess = parseInt(guessInput.value);
-  });
   
 appWindow.commandLine.addEventListener("keyup", (e) => {
-      e.preventDefault();
       if ( e.keyCode === 13 ) {
           appWindow.submit.click();
+          console.log("Command line is clicking submit...")
       }
   });
   
-  appWindow.submit.addEventListener("click", (e) => {
-      checkAnswer(e);
+  appWindow.submit.addEventListener("click", (e) => {  
+    console.log("The submit button was clicked!")
+    checkAnswer(e);
   });
   
   appWindow.gridBtn.addEventListener("mousedown", (e) => {
