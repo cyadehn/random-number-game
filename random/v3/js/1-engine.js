@@ -14,8 +14,8 @@ const sceneInit = () => {
     currentScene.gridRef.forEach( (x) => {
         appWindow.guessGrid.appendChild(x);
     });
-    currentScene.gridRef = Array.from(document.querySelectorAll("#guess-grid div"));
-    typewriter( currentScene );
+    currentScene.gridRef = Array.from(document.querySelectorAll("#grid div"));
+    // typewriter( currentScene );
 
     console.log("Scene initialized!")
 }

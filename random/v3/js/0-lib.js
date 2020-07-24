@@ -134,12 +134,13 @@ const guessTracker = () =>{
             currentScene.notGuessed.indexOf(5)
         ) , 1 );
     }
+    console.log(currentScene.notGuessed.indexOf(guess));
 
     //Update guessGrid classes
     let guessDiv = currentScene.gridRef[guess - 1];
     console.log("The div related to this guess is " + guessDiv + ".");
-    if (guessDivguessDiv.classList.remove("not-guessed"));
-    if ( guess === randomNumber ) {
+    if (guessDiv.classList.remove("not-guessed"));
+    if ( guess === currentScene.randomNumber ) {
         guessDiv.classList.add("correct");
     } else {
         guessDiv.classList.add("guessed");
@@ -164,7 +165,6 @@ const response = () => {
 }
 
 const counterUpdate = () => {
-    console.log("tick");
     let tDiff = Date.now() - t0;
     let seconds = Math.floor(tDiff/1000);
     // let hundredths = Math.floor((tDiff - (seconds * 100))/10).toFixed(3);

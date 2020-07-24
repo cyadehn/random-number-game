@@ -1,5 +1,10 @@
-See if the game will meet the requirements:
+/* See if the game will meet the requirements:
 Responsive:
 Phones: Get rid of the tracking grid, do a list of numbers? Center the input (account for the keyboard)
 Mid-large: Resize main window, others?
-Design a landing page before entering with basic information about yourself
+Design a landing page before entering with basic information about yourself */
+
+.guessed {
+    background-color: red;
+    color: white;
+}
