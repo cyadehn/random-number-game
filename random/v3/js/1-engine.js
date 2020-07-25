@@ -10,7 +10,7 @@ const sceneInit = () => {
     // resetWindow
     appWindow.submit.disabled = false;
     //reset guess grid
-    appWindow.guessGrid.innerHTML = "";
+    appWindow.guessGrid.innerHTML = "<p>Previous Guesses:</p>";
     currentScene.gridRef.forEach( (x) => {
         appWindow.guessGrid.appendChild(x);
     });
