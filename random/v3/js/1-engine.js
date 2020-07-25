@@ -19,6 +19,7 @@ const sceneInit = () => {
     typewriter( currentScene );
 
     console.log("Scene initialized!")
+    clearConsole();
 }
 
 const checkAnswer = (e) => {
@@ -36,11 +37,18 @@ const checkAnswer = (e) => {
     guess = parseInt(appWindow.commandLine.value);
     typewriter( currentScene );
     guessTracker();
+    if (guess === currentScene.randomNumber ) {
+        endGame();
+    }
     clearTimeout(typewriterID);
     appWindow.commandLine.value = "";
+    clearConsole();
 }
 
 const endGame = () => {
+    
+    console.log("The game is ending...");
+
     updateScore();
     currentScene.t1 = Date.now();
     clearInterval(counterID);
@@ -48,7 +56,8 @@ const endGame = () => {
     appWindow.submit.disabled = true;
     sceneIndex += 1;
 
-    let remainder = guessGrid.filter( item => item.classList.contains("not-guessed"));
+    let remainder = currentScene.gridRef.filter( item => item.classList.contains("not-guessed"));
+    console.warn(remainder);
     remainder.forEach( item => item.classList.remove("not-guessed") );
     remainder.forEach( item => item.classList.add("guessed") );
     
