@@ -66,24 +66,29 @@ const typeResponse = (scene) => {
     let target = appWindow.speechBox;
     target.innerHTML = "";
 
-    var responseText = response(scene);
+    let responseText = response(scene);
     let i = 0;
-
+    console.log(responseText.length);
+    console.log(i);
     // target.innerHTML = responseText;
 
-    const printChar = ( text ) => {
-        if ( i < text.length ) {
+    const printChar = () => {
+
+        if ( i < responseText.length ) {
             typewriterID = setTimeout(() => {
-                printChar(responseText);
+                console.log("Printing!");
+                printChar();
             }, speed);
             target.innerHTML += responseText.charAt(i);
             i += 1;
         } else {
-             clearTimeout(typewriterID);
-         }
+            console.log("Finished printing!");
+            clearTimeout(typewriterID);
+            i = 0;
+        }
     }
     console.log("Printing!");
-    printChar(responseText);
+    printChar();
 }
 
 //combine two functions above into below

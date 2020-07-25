@@ -19,7 +19,7 @@ const sceneInit = () => {
     typewriter( currentScene );
 
     console.log("Scene initialized!")
-    clearConsole();
+    // clearConsole();
 }
 
 const checkAnswer = (e) => {
@@ -40,9 +40,8 @@ const checkAnswer = (e) => {
     if (guess === currentScene.randomNumber ) {
         endGame();
     }
-    clearTimeout(typewriterID);
     appWindow.commandLine.value = "";
-    clearConsole();
+    // clearConsole();
 }
 
 const endGame = () => {
