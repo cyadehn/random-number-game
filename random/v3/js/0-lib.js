@@ -169,10 +169,10 @@ const guessTracker = () =>{
 }
 
 const counterUpdate = () => {
-    let tDiff = Date.now() - t0;
-    let seconds = Math.floor(tDiff/1000);
+    let tDelta = Date.now() - t0;
+    let seconds = (Math.floor(tDelta/1000) % 60).toLocaleString(undefined, {minimumIntegerDigits: 2});
     // let hundredths = Math.floor((tDiff - (seconds * 100))/10).toFixed(3);
-    let minutes = Math.floor(seconds/60);
+    let minutes = Math.floor(tDelta/60000).toLocaleString(undefined, {minimumIntegerDigits: 2});
     let target = appWindow.counter;
     target.innerHTML = minutes + "m:" + seconds + "s";
 }
