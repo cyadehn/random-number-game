@@ -30,3 +30,7 @@ Design a landing page before entering with basic information about yourself */
     float: left;
     font-size: 2em;
 }
+
+input[type="number"] {
+    font-size: 16px;
+}
