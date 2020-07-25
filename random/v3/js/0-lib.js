@@ -6,24 +6,27 @@ const response = (scene) => {
     let responseText;
     let dx = scene.dialogue;
     
-    console.log(`The upper number is ${scene.upper} and the guessed number is ${guess}`)
+    console.info(`%cThe upper number is ${scene.upper} and the guessed number is ${guess}`, "color: blue;")
 
     console.log("Determining response...");
     if ( scene.attempts === 0 ) {
-        console.log("The response is intro");
+        console.info("%cResponse: intro", "color: blue;");
         responseText = dx.intro;
     } else if ( guess < 0 || guess > scene.upper || !guess ) {
-        console.log(`The guess is ${guess}`)
-        console.log("The response is invalid.");
+        console.info(`%cThe guess is ${guess}`, "color: blue;");
+        console.info("%Response: invalid.", "color: blue;");
         responseText = dx.invalid;
     } else if ( scene.notGuessed.indexOf(guess) === -1 ) {
-        console.log("The response is alreadyGuessed.");
+        console.info(`%cThe guess is ${guess}`, "color: blue;");
+        console.info("%Response: alreadyGuessed.", "color: blue;");
         responseText = dx.alreadyGuessed;
     } else if ( guess != scene.randomNumber ) {
-        console.log("The response is incorrect.");
+        console.info(`%cThe guess is ${guess}`, "color: blue;");
+        console.info("%cResponse: incorrect.", "color: blue;");
         responseText = dx.incorrect;
     } else {
-        console.log("The response is correct.");
+        console.info(`%cThe guess is ${guess}`, "color: blue;");
+        console.info("%cResponse: correct.", "color: blue;");
         responseText = dx.correct;
     }
     return responseText;
@@ -68,7 +71,6 @@ const typeResponse = (scene) => {
     target.innerHTML = "";
 
     var text = response(scene);
-    console.log("The response is '" + text + "'.");
 
     let i = 0;
 

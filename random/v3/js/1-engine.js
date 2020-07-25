@@ -15,6 +15,7 @@ const sceneInit = () => {
         appWindow.guessGrid.appendChild(x);
     });
     currentScene.gridRef = Array.from(document.querySelectorAll("#grid div"));
+    appWindow.guessGrid.setAttribute("style", "display: none");
     typewriter( currentScene );
 
     console.log("Scene initialized!")
