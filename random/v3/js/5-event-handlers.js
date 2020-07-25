@@ -18,11 +18,14 @@ const displayGuesses = (event) => {
       event.type == "mouseout" ||
       event.type == "touchleave" ||
       event.type == "touchcancel" ) {
-        
+
         target.setAttribute("style", "display: none")
         
         //Mobile refocuses on keyboard input
-        if (event.type == "touchend") {
+        if (
+          event.type == "touchend" ||
+          event.type == "touchleave" ||
+          event.type == "touchcancel" ) {
             appWindow.commandLine.focus();
         }
     }
