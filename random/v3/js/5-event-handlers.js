@@ -12,7 +12,7 @@ const displayGuesses = (event) => {
         }
     }
 
-    if ( event.type == "mouseup" || event.type == "touchend" ) {
+    if ( event.type == "mouseup" || event.type == "touchend" || event.type == "mouseout" ) {
         target.setAttribute("style", "display: none")
         
         //Mobile refocuses on keyboard input
@@ -46,6 +46,9 @@ appWindow.commandLine.addEventListener("keyup", (e) => {
   appWindow.gridBtn.addEventListener("touchend", (e) => {
     displayGuesses(e);
   });
+  appWindow.gridBtn.addEventListener ("mouseout", (e) => {
+    displayGuesses(e);
+  })
   
   window.addEventListener("load", () => {
       gameInit();
