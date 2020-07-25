@@ -16,8 +16,8 @@ const scenes = [
             intro: `> Hi, there! Think you can beat me at a game? Let's see... Type below to guess a number between 1 and ${this.upper}!`,
             incorrect: `> Hm. That wasn't it, huh? Just keep guessing! What's another number between 1 and ${this.upper}?`,
             invalid: `> ...that doesn't look like a number between 1 and ${this.upper}... That's okay! Take a breather and then you're sure to get it!`,
-            alreadyGuessed: `Sorry... you already guessed that number. Try again!`,
-            correct: `You did it! The number was ${this.randomNumber} and it only took you ${this.attempts} tries and ${playerScore.time[sceneIndex + 1]} seconds to get it. Would you like to see how the computer did?`
+            alreadyGuessed: `> Sorry... you already guessed that number. Try again!`,
+            correct: `> You did it! The number was ${this.randomNumber} and it only took you ${this.attempts} tries and ${playerScore.time[sceneIndex + 1]} seconds to get it. Would you like to see how the computer did?`
         }
     },
     {
