@@ -21,14 +21,6 @@ const displayGuesses = (event) => {
 
         target.setAttribute("style", "display: none")
         appWindow.commandLine.focus();
-
-        //Mobile refocuses on keyboard input
-        // if (
-        //   event.type == "touchend" ||
-        //   event.type == "touchleave" ||
-        //   event.type == "touchcancel" ) {
-            
-        // }
     }
 }
 
@@ -72,19 +64,17 @@ appWindow.commandLine.addEventListener("keyup", (e) => {
       appWindow.commandLine.focus();
   });
 
-  function monitorEvents(element) {
-    var log = function(e) { 
-      document.getElementById("monitor").innerHTML = e;
-      console.log(e);
-     };
-    var events = [];
+  // function monitorEvents(element) {
+  //   var log = function(e) { 
+  //     document.getElementById("monitor").innerHTML = e;
+  //     console.log(e);
+  //    };
+  //   var events = [];
   
-    for(var i in element) {
-      if(i.startsWith("on")) events.push(i.substr(2));
-    }
-    events.forEach(function(eventName) {
-      element.addEventListener(eventName, log);
-    });
-  }
-
-  monitorEvents(document.getElementById("display-grid"));
+  //   for(var i in element) {
+  //     if(i.startsWith("on")) events.push(i.substr(2));
+  //   }
+  //   events.forEach(function(eventName) {
+  //     element.addEventListener(eventName, log);
+  //   });
+  // }
