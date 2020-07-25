@@ -6,26 +6,22 @@ const response = (scene) => {
     let responseText;
     let dx = scene.dialogue;
     
-    console.info(`%cThe upper number is ${scene.upper} and the guessed number is ${guess}`, "color: blue;")
+    console.info(`%cThe upper number is ${scene.upper}, and the guessed number (type: ${typeof guess}) is ${guess}`, "color: blue;")
 
     console.log("Determining response...");
     if ( scene.attempts === 0 ) {
         console.info("%cResponse: intro", "color: blue;");
         responseText = dx.intro;
     } else if ( guess < 0 || guess > scene.upper || !guess ) {
-        console.info(`%cThe guess is ${guess}`, "color: blue;");
-        console.info("%Response: invalid.", "color: blue;");
+        console.info("%cResponse: invalid.", "color: blue;");
         responseText = dx.invalid;
     } else if ( scene.notGuessed.indexOf(guess) === -1 ) {
-        console.info(`%cThe guess is ${guess}`, "color: blue;");
-        console.info("%Response: alreadyGuessed.", "color: blue;");
+        console.info("%cResponse: alreadyGuessed.", "color: blue;");
         responseText = dx.alreadyGuessed;
     } else if ( guess != scene.randomNumber ) {
-        console.info(`%cThe guess is ${guess}`, "color: blue;");
         console.info("%cResponse: incorrect.", "color: blue;");
         responseText = dx.incorrect;
     } else {
-        console.info(`%cThe guess is ${guess}`, "color: blue;");
         console.info("%cResponse: correct.", "color: blue;");
         responseText = dx.correct;
     }
@@ -65,34 +61,34 @@ const glitchType = (scene) => {
 const typeResponse = (scene) => {
     
     //Configure typewriter function speed
-    let speed = 25;
+    let speed = 15;
     //Configure target HTML element & clear previous message
     let target = appWindow.speechBox;
     target.innerHTML = "";
 
-    var text = response(scene);
-
+    var responseText = response(scene);
     let i = 0;
 
-    target.innerHTML = text;
+    // target.innerHTML = responseText;
 
-    // const printChar = ( text ) => {
-    //     console.log("Printing!");
-    //     console.log( text );
-    //     if ( i < text.length ) {
-    //         typewriterID = setTimeout(printChar(text), speed);
-    //         target.innerHTML += text.charAt(i);
-    //         i += 1;
-    //     } else {
-    //          clearTimeout(typewriterID);
-    //      }
-    // }
-    // printChar(text);
+    const printChar = ( text ) => {
+        if ( i < text.length ) {
+            typewriterID = setTimeout(() => {
+                printChar(responseText);
+            }, speed);
+            target.innerHTML += responseText.charAt(i);
+            i += 1;
+        } else {
+             clearTimeout(typewriterID);
+         }
+    }
+    console.log("Printing!");
+    printChar(responseText);
 }
 
 //combine two functions above into below
 const typewriter = ( scene ) => {
-    console.log("Typing message...")
+    console.log(`Typing message for ${scene.name}...`)
     if ( scene.type == "game" ) {
         typeResponse(scene);
     }
@@ -149,7 +145,7 @@ const updateScore = () => {
 
 const guessTracker = () =>{
     
-    console.log(`Your guess is ${guess}, type: "${typeof guess}." Updating guesses...`);
+    console.log(`Updating guesses...`);
 
     //Remove from tracking array
     if ( currentScene.notGuessed[guess-1] ) {
