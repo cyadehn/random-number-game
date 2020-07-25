@@ -13,7 +13,9 @@ events.forEach(function(eventName) {
 });
 }
 
+let consoleID;
 const clearConsole = () => {
-    setTimeout( () => {console.clear()}, 10002);
+    clearTimeout(consoleID);
+    consoleID = setTimeout( () => {console.clear()}, 10002);
     console.log(`Console will clear in 10 seconds.`);
 }
