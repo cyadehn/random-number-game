@@ -15,7 +15,7 @@ const sceneInit = () => {
         appWindow.guessGrid.appendChild(x);
     });
     currentScene.gridRef = Array.from(document.querySelectorAll("#grid div"));
-    // typewriter( currentScene );
+    typewriter( currentScene );
 
     console.log("Scene initialized!")
 }
@@ -31,12 +31,12 @@ const checkAnswer = (e) => {
         counterID =  window.setInterval(counterUpdate, 100);
     }
     
-    guess = parseInt(appWindow.commandLine.value);
-    guessTracker();
     currentScene.attempts += 1;
+    guess = parseInt(appWindow.commandLine.value);
+    typewriter( currentScene );
+    guessTracker();
     clearTimeout(typewriterID);
-    guessInput.value = "";
-    typewriter(char, response());
+    appWindow.commandLine.value = "";
 }
 
 const endGame = () => {

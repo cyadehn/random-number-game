@@ -1,4 +1,34 @@
+let typewriterID;
 //scene.dialogue must contain an array
+
+const response = (scene) => {
+    //Check guess to set response text
+    let responseText;
+    let dx = scene.dialogue;
+    
+    console.log(`The upper number is ${scene.upper} and the guessed number is ${guess}`)
+
+    console.log("Determining response...");
+    if ( scene.attempts === 0 ) {
+        console.log("The response is intro");
+        responseText = dx.intro;
+    } else if ( guess < 0 || guess > scene.upper || !guess ) {
+        console.log(`The guess is ${guess}`)
+        console.log("The response is invalid.");
+        responseText = dx.invalid;
+    } else if ( scene.notGuessed.indexOf(guess) === -1 ) {
+        console.log("The response is alreadyGuessed.");
+        responseText = dx.alreadyGuessed;
+    } else if ( guess != scene.randomNumber ) {
+        console.log("The response is incorrect.");
+        responseText = dx.incorrect;
+    } else {
+        console.log("The response is correct.");
+        responseText = dx.correct;
+    }
+    return responseText;
+}
+
 const glitchType = (scene) => {
 
     //Configure glitch function speed
@@ -7,7 +37,6 @@ const glitchType = (scene) => {
     let target = appWindow.speechBox;
 
     let dialogue = scene.dialogue;
-    let glitchTypeID;
     let arrayIndex = 0;
     let lineIndex = 0;
 
@@ -17,7 +46,7 @@ const glitchType = (scene) => {
                 target.innerHTML += dialogue[arrayIndex].charAt(lineIndex);
                 lineIndex += 1;
                 console.log("line index increased to " + lineIndex);
-                glitchTypeID = setTimeout(printLine, glitchSpeed);
+                typewriterID = setTimeout(printLine, glitchSpeed);
             }
         } else if ( index < dialogue.length ) {
             domVar.innerHTML = "";
@@ -37,34 +66,26 @@ const typeResponse = (scene) => {
     //Configure target HTML element & clear previous message
     let target = appWindow.speechBox;
     target.innerHTML = "";
-    
-    let dialogue = scene.dialogue;
-    let response;
 
-    //Sets response according to checkAnswer result
-    if ( scene.attempts === 0 ) {
-        response = dialogue.intro;
-    } else if ( invalidGuess ) {
-        response = dialogue.invalid;
-    } else if ( !correctGuess ) {
-        response = dialogue.incorrect;
-    } else {
-        response = dialogue.correct;
-    }
+    var text = response(scene);
+    console.log("The response is '" + text + "'.");
 
-    let typewriterID;
     let i = 0;
 
-    const typewriter = (text) => {
-        typewriterID = setTimeout(typewriter, speed);
-        if ( i < text.length ) {
-            speechBox.innerHTML += text.charAt(i);
-            i += 1;
-        } else {
-             clearTimeout(typewriterID);
-         }
-    }
-    typewriter(response);
+    target.innerHTML = text;
+
+    // const printChar = ( text ) => {
+    //     console.log("Printing!");
+    //     console.log( text );
+    //     if ( i < text.length ) {
+    //         typewriterID = setTimeout(printChar(text), speed);
+    //         target.innerHTML += text.charAt(i);
+    //         i += 1;
+    //     } else {
+    //          clearTimeout(typewriterID);
+    //      }
+    // }
+    // printChar(text);
 }
 
 //combine two functions above into below
@@ -131,37 +152,20 @@ const guessTracker = () =>{
     //Remove from tracking array
     if ( currentScene.notGuessed[guess-1] ) {
         currentScene.notGuessed.splice( (
-            currentScene.notGuessed.indexOf(5)
+            currentScene.notGuessed.indexOf(guess)
         ) , 1 );
     }
-    console.log(currentScene.notGuessed.indexOf(guess));
 
     //Update guessGrid classes
     let guessDiv = currentScene.gridRef[guess - 1];
-    console.log("The div related to this guess is " + guessDiv + ".");
-    if (guessDiv.classList.remove("not-guessed"));
-    if ( guess === currentScene.randomNumber ) {
-        guessDiv.classList.add("correct");
-    } else {
-        guessDiv.classList.add("guessed");
+    if (guessDiv) {
+        guessDiv.classList.remove("not-guessed");
+        if ( guess === currentScene.randomNumber ) {
+            guessDiv.classList.add("correct");
+        } else {
+            guessDiv.classList.add("guessed");
+        }
     }
-}
-
-const response = () => {
-    let response;
-    let dx = currentScene.dialogue;
-    console.log("Determining response...");
-    if ( !guess > 0 || !guess <= currentScene.upper ) {
-        response = dx.invalid
-    } else if ( !currentScene.notGuessed[guess-1] ) {
-        response = dx.alreadyGuessed;
-    } else if ( guess != currentScene.randomNumber ) {
-        response = dx.incorrect;
-    } else {
-        response = dx.correct;
-        endGame();
-    }
-    return response;
 }
 
 const counterUpdate = () => {
