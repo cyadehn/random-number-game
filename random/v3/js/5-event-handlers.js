@@ -12,7 +12,13 @@ const displayGuesses = (event) => {
         }
     }
 
-    if ( event.type == "mouseup" || event.type == "touchend" || event.type == "mouseout" ) {
+    if ( 
+      event.type == "mouseup" || 
+      event.type == "touchend" || 
+      event.type == "mouseout" ||
+      event.type == "touchleave" ||
+      event.type == "touchcancel" ) {
+        
         target.setAttribute("style", "display: none")
         
         //Mobile refocuses on keyboard input
@@ -48,7 +54,13 @@ appWindow.commandLine.addEventListener("keyup", (e) => {
   });
   appWindow.gridBtn.addEventListener ("mouseout", (e) => {
     displayGuesses(e);
-  })
+  });
+  appWindow.gridBtn.addEventListener ("touchleave", (e) => {
+    displayGuesses(e);
+  });
+  appWindow.gridBtn.addEventListener ("touchcancel", (e) => {
+    displayGuesses(e);
+  });
   
   window.addEventListener("load", () => {
       gameInit();
