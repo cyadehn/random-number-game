@@ -4,6 +4,10 @@ Phones: Get rid of the tracking grid, do a list of numbers? Center the input (ac
 Mid-large: Resize main window, others?
 Design a landing page before entering with basic information about yourself */
 
+* {
+    box-sizing: border-box;
+}
+
 .guessed {
     background-color: red;
     color: white;
@@ -11,4 +15,18 @@ Design a landing page before entering with basic information about yourself */
 
 .correct {
     background-color: lime;
+}
+
+.display-grid {
+    background: yellow;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.grid div {
+    width: 25%;
+    line-height: 12vw;
+    text-align: center;
+    float: left;
+    font-size: 2em;
 }
