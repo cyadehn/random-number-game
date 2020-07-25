@@ -22,14 +22,13 @@ const displayGuesses = (event) => {
         target.setAttribute("style", "display: none")
         
         //Mobile refocuses on keyboard input
-        // if (
-        //   event.type == "touchend" ||
-        //   event.type == "touchleave" ||
-        //   event.type == "touchcancel" ) {
-        //     appWindow.commandLine.focus();
-        // }
+        if (
+          event.type == "touchend" ||
+          event.type == "touchleave" ||
+          event.type == "touchcancel" ) {
+            appWindow.commandLine.focus();
+        }
     }
-    appWindow.commandLine.focus();
 }
 
 /* Event Listeners */
