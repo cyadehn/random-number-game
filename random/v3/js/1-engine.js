@@ -18,13 +18,13 @@ const sceneInit = () => {
     appWindow.guessGrid.setAttribute("style", "display: none");
     typewriter( currentScene );
 
-    console.log("Scene initialized!")
+    console.info("Scene initialized!")
     // clearConsole();
 }
 
 const checkAnswer = (e) => {
 
-    console.log("Checking answer...");
+    console.info("Checking answer...");
 
     e.preventDefault();
 
@@ -46,7 +46,7 @@ const checkAnswer = (e) => {
 
 const endGame = () => {
     
-    console.log("The game is ending...");
+    console.info("The game is ending...");
 
     updateScore();
     currentScene.t1 = Date.now();
@@ -56,7 +56,6 @@ const endGame = () => {
     sceneIndex += 1;
 
     let remainder = currentScene.gridRef.filter( item => item.classList.contains("not-guessed"));
-    console.warn(remainder);
     remainder.forEach( item => item.classList.remove("not-guessed") );
     remainder.forEach( item => item.classList.add("guessed") );
     

@@ -415,5 +415,5 @@ const gameInit = () => {
             scenes[i].gridRef = gridArray(scenes[i]);
         }
     }
-    console.log("Game initialized!");
+    console.info("Game initialized!");
 }

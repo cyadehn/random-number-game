@@ -6,23 +6,17 @@ const response = (scene) => {
     let responseText;
     let dx = scene.dialogue;
     
-    console.info(`%cThe upper number is ${scene.upper}, and the guessed number (type: ${typeof guess}) is ${guess}`, "color: blue;")
+    // console.log(`%cThe upper number is ${scene.upper}, and the guessed number (type: ${typeof guess}) is ${guess}`, "color: blue;")
 
-    console.log("Determining response...");
     if ( scene.attempts === 0 ) {
-        console.info("%cResponse: intro", "color: blue;");
         responseText = dx.intro;
     } else if ( guess < 0 || guess > scene.upper || !guess ) {
-        console.info("%cResponse: invalid.", "color: blue;");
         responseText = dx.invalid;
     } else if ( scene.notGuessed.indexOf(guess) === -1 ) {
-        console.info("%cResponse: alreadyGuessed.", "color: blue;");
         responseText = dx.alreadyGuessed;
     } else if ( guess != scene.randomNumber ) {
-        console.info("%cResponse: incorrect.", "color: blue;");
         responseText = dx.incorrect;
     } else {
-        console.info("%cResponse: correct.", "color: blue;");
         responseText = dx.correct;
     }
     return responseText;
@@ -68,32 +62,29 @@ const typeResponse = (scene) => {
 
     let responseText = response(scene);
     let i = 0;
-    console.log(responseText.length);
-    console.log(i);
     // target.innerHTML = responseText;
 
     const printChar = () => {
 
         if ( i < responseText.length ) {
             typewriterID = setTimeout(() => {
-                console.log("Printing!");
                 printChar();
             }, speed);
             target.innerHTML += responseText.charAt(i);
             i += 1;
         } else {
-            console.log("Finished printing!");
+            console.info("Finished printing!");
             clearTimeout(typewriterID);
             i = 0;
         }
     }
-    console.log("Printing!");
     printChar();
 }
 
 //combine two functions above into below
 const typewriter = ( scene ) => {
-    console.log(`Typing message for ${scene.name}...`)
+    clearTimeout(typewriterID);
+    console.info(`Printing message for ${scene.name}...`)
     if ( scene.type == "game" ) {
         typeResponse(scene);
     }
@@ -103,13 +94,8 @@ const typewriter = ( scene ) => {
 }
 
 const getRandomNumber = (scene) => {
-    // console.log("getRandomNumber has started");
     let num = 0;
-    // console.log(`The type of num is ${typeof num}!`);
-    // console.log(`The upper number is ${scene.upper} and its type is ${typeof scene.upper}`);
     num = Math.floor(Math.random() * scene.upper) + 1;
-    // console.log(`The type of num is ${typeof num}!`);
-    // console.log(num);
     return num;
 }
 
@@ -133,7 +119,7 @@ const gridArray = (scene) => {
 }
 
 const tSec = ( scene ) => {
-    console.log("Calculating time elapsed...");
+    console.info("Calculating time elapsed...");
     let start = scene.t0;
     let end = scene.t1;
     let timeDiff = end - start;
@@ -143,14 +129,14 @@ const tSec = ( scene ) => {
 }
 
 const updateScore = () => {
-    console.log("Updating score...");
+    console.info("Updating score...");
     tSec( currentScene );
     playerScore.attempts[sceneIndex] = currentScene.attempts;
 }
 
 const guessTracker = () =>{
     
-    console.log(`Updating guesses...`);
+    console.info(`Updating guesses...`);
 
     //Remove from tracking array
     if ( currentScene.notGuessed[guess-1] ) {
