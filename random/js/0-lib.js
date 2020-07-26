@@ -5,8 +5,6 @@ const response = (scene) => {
     //Check guess to set response text
     let responseText;
     let dx = scene.dialogue;
-    
-    // console.log(`%cThe upper number is ${scene.upper}, and the guessed number (type: ${typeof guess}) is ${guess}`, "color: blue;")
 
     if ( scene.attempts === 0 ) {
         responseText = dx.intro;
@@ -73,7 +71,6 @@ const typeResponse = (scene) => {
             target.innerHTML += responseText.charAt(i);
             i += 1;
         } else {
-            console.info("Finished printing!");
             clearTimeout(typewriterID);
             i = 0;
         }
@@ -84,38 +81,12 @@ const typeResponse = (scene) => {
 //combine two functions above into below
 const typewriter = ( scene ) => {
     clearTimeout(typewriterID);
-    console.info(`Printing message for ${scene.name}...`)
     if ( scene.type == "game" ) {
         typeResponse(scene);
     }
     if ( scene.type == "line" ) {
         glitchType(scene);
     }
-}
-
-const getRandomNumber = (scene) => {
-    let num = 0;
-    num = Math.floor(Math.random() * scene.upper) + 1;
-    return num;
-}
-
-const guessArray = (scene) => {
-    let array = [];
-    for ( let i = 0; i < scene.upper; i ++ ) {
-        array.push( i + 1 );
-    }
-    return array;
-}
-
-const gridArray = (scene) => {
-    let array = [];
-    for ( let i = 1; i <= scene.upper; i ++ ) {
-        let div = document.createElement("div");
-        div.innerHTML = i;
-        div.classList.add(i, "not-guessed");
-        array.push(div);
-    }
-    return array;
 }
 
 const tSec = ( scene ) => {
@@ -135,8 +106,6 @@ const updateScore = () => {
 }
 
 const guessTracker = () =>{
-    
-    console.info(`Updating guesses...`);
 
     //Remove from tracking array
     if ( currentScene.notGuessed[guess-1] ) {

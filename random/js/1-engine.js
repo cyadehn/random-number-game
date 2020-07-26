@@ -1,25 +1,27 @@
 let counterID;
-let dialogue;
 let guess;
 
 const sceneInit = () => {
 
     currentScene = scenes[sceneIndex];
-    dialogue = currentScene.dialogue;
-    
-    // resetWindow
-    appWindow.submit.disabled = false;
-    //reset guess grid
-    appWindow.guessGrid.innerHTML = "<p>Previous Guesses:</p>";
-    currentScene.gridRef.forEach( (x) => {
-        appWindow.guessGrid.appendChild(x);
-    });
-    currentScene.gridRef = Array.from(document.querySelectorAll("#grid div"));
-    appWindow.guessGrid.setAttribute("style", "display: none");
-    typewriter( currentScene );
 
+
+    if ( currentScene.type == "glitch" || "cutscene" ) {
+        // glitch();
+    }
+    if ( currentScene.type == "game" ) {
+        // resetWindow
+        appWindow.submit.disabled = false;
+        //reset guess grid
+        appWindow.guessGrid.innerHTML = "<p>Previous Guesses:</p>";
+        currentScene.gridRef.forEach( (x) => {
+            appWindow.guessGrid.appendChild(x);
+        });
+        currentScene.gridRef = Array.from(document.querySelectorAll("#grid div"));
+        appWindow.guessGrid.setAttribute("style", "display: none");
+        typewriter( currentScene );
+    }
     console.info("Scene initialized!")
-    // clearConsole();
 }
 
 const checkAnswer = (e) => {
@@ -41,7 +43,6 @@ const checkAnswer = (e) => {
         endGame();
     }
     appWindow.commandLine.value = "";
-    // clearConsole();
 }
 
 const endGame = () => {
@@ -58,13 +59,8 @@ const endGame = () => {
     let remainder = currentScene.gridRef.filter( item => item.classList.contains("not-guessed"));
     remainder.forEach( item => item.classList.remove("not-guessed") );
     remainder.forEach( item => item.classList.add("guessed") );
-    
-    if ( currentScene.type == "game" ) {
-        sceneInit(currentScene);
-    }
-    if ( currentScene.type == "glitch" || "cutscene" ) {
-        glitch();
-    }
+
+    sceneInit(currentScene);
 }
 
 // const glitch = () => {
