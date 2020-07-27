@@ -10,7 +10,7 @@ const response = (scene) => {
         responseText = dx.intro;
     } else if ( guess < 0 || guess > scene.upper || !guess ) {
         responseText = dx.invalid;
-    } else if ( scene.notGuessed.indexOf(guess) === -1 ) {
+    } else if ( scene.possibleGuesses.indexOf(guess) === -1 ) {
         responseText = dx.alreadyGuessed;
     } else if ( guess != scene.randomNumber ) {
         responseText = dx.incorrect;
@@ -108,15 +108,21 @@ const updateScore = () => {
 const guessTracker = () =>{
 
     //Remove from tracking array
-    if ( currentScene.notGuessed[guess-1] ) {
-        currentScene.notGuessed.splice( (
-            currentScene.notGuessed.indexOf(guess)
-        ) , 1 );
+    let guessIndex = currentScene.possibleGuesses.indexOf(guess);
+    if ( guessIndex > -1 ) {
+        currentScene.possibleGuesses.splice(guessIndex, 1);
     }
 
+
     //Update guessGrid classes
-    let guessDiv = currentScene.gridRef[guess - 1];
-    if (guessDiv) {
+    let guessDiv;
+    let displayRef = currentScene.displayRef;
+    let displayIndex = displayRef.indexOf(guess);
+    if ( displayIndex > -1 ) {
+        guessDiv = currentScene.gridRef[displayIndex];
+        console.info(guessDiv);
+    }
+    if ( guessDiv && guessDiv.classList.contains("not-guessed") ) {
         guessDiv.classList.remove("not-guessed");
         if ( guess === currentScene.randomNumber ) {
             guessDiv.classList.add("correct");

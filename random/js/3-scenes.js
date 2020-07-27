@@ -1,18 +1,19 @@
 let sceneIndex = 0;
 let currentScene;
 
-const guessArray = (scene) => {
+const guessArray = (scene, mode) => {
     let n = scene.randomNumber;
     let upper = scene.upper;
     let range = scene.range;
     console.log(`Number: ${n}, Upper: ${upper}, Range: ${range}`);
-    if ( upper === range ) {
+    if ( mode === "all" ) {
         let array = [];
         for ( let i = 0; i < upper; i ++ ) {
             array.push( i + 1 );
         }
         return array;
-    } else {
+    } 
+    if ( mode === "range" ) {
         let array = [n];
         let i = 1;
         do {
@@ -43,7 +44,7 @@ const guessArray = (scene) => {
 }
 
 const gridArray = (scene) => { //rewrite to build via the guesses array
-    let range = scene.notGuessed;
+    let range = scene.displayRef;
     let array = [];
     for ( let i = 0; i < range.length; i ++ ) {
         let div = document.createElement("div");
@@ -67,7 +68,8 @@ function GameScene(type, name, activeWindow, upper, range, dialogue) {
     this.upper = upper;
     this.randomNumber = getRandomNumber(this);
     this.range = range;
-    this.notGuessed = guessArray(this);
+    this.displayRef = guessArray(this, "range"); //range-based tracker
+    this.possibleGuesses = guessArray(this, "all"); //all possible guesses
     this.gridRef = gridArray(this);
     this.attempts = 0;
     this.dialogue = dialogue;
@@ -87,7 +89,7 @@ const sceneData = [
         "game-start", //name
         "start", //activeWindow
         20, //upper
-        10, //range
+        20, //range
         {
             intro: `> Hi, there! Think you can beat me at a game? Let's see... Type below to guess a number between 1 and ${this.upper}!`,
             incorrect: `> Hm. That wasn't it, huh? Just keep guessing! What's another number between 1 and ${this.upper}?`,
