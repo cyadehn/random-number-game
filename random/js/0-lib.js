@@ -17,6 +17,7 @@ const response = (scene) => {
     } else {
         responseText = dx.correct;
     }
+    responseText = responseText.toUpperCase();
     return responseText;
 }
 

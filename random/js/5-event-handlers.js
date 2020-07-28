@@ -1,7 +1,7 @@
 /* Event Handlers */
 const displayGuesses = (event) => {
     const target = appWindow.displayGrid;
-    target.setAttribute("style", "display: none");
+    target.setAttribute("style", "visibility: hidden");
     
     if ( event.type == "mousedown" || event.type == "touchstart" ) {
         target.setAttribute("style", "");
@@ -19,7 +19,7 @@ const displayGuesses = (event) => {
       event.type == "touchleave" ||
       event.type == "touchcancel" ) {
 
-        target.setAttribute("style", "display: none")
+        target.setAttribute("style", "visibility: hidden")
         appWindow.commandLine.focus();
     }
 }

@@ -8,9 +8,81 @@ Design a landing page before entering with basic information about yourself */
     box-sizing: border-box;
 }
 
+:root {
+
+
+    /* Cosmetic */
+    --window-title: 
+}
+
+/* Base Styles */
+
 body {
-    font-family: 'VT323', monospace;
-    font-size: 1.5em;
+    font-family: 'B612 mono', monospace;
+    font-size: .85em;
+    background-color: rgb(170, 139, 118);
+    padding: 10px;
+}
+
+.app {
+    height: auto;
+    border-radius: 5px 5px 3px 3px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0,0,0,.8);
+}
+
+.speech-box {
+    padding: 0 10px;
+}
+
+.window {
+    background-color: black;
+    color: white;
+    padding: 0 4px;
+}
+
+.display-grid,
+.grid div {
+    background: #f9daa6;
+    color: rgb(42, 47, 55);
+}
+
+header {
+    height: 5vh;
+}
+
+p {
+    margin: 0;
+}
+
+input[type="number"] {
+    font-family: inherit;
+}
+
+.submit,
+.input input {
+    all: unset;
+}
+
+/* Cosmetic */
+
+.titlebar {
+    grid-area: titlebar;
+    height: 1.5em;
+    background: linear-gradient(90deg, #ddcbb3, #c9b39b);
+    
+}
+
+.close {
+    background-color: rgb(236, 15, 15);
+}
+
+.minimize {
+    background-color: rgb(219, 179, 67);
+}
+
+.maximize {
+    background-color: rgb(26, 214, 83);
 }
 
 .guessed {
@@ -22,21 +94,139 @@ body {
     background-color: lime;
 }
 
+.input,
+.submit,
+.counter {
+    background-color: white;
+    color: black;
+}
+
 .display-grid {
-    background: yellow;
+    display: inline-block;
+    /* width: 50%; */
+    font-size: .85em;
     text-align: center;
-    padding: 5px 0;
+    padding: 5px 10px;
+    /* border-radius: 50px; */
+}
+
+/* Layout */
+
+.window {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 5px 25vh auto 1fr;
+    grid-template-areas:
+        "titlebar titlebar"
+        "speech-box speech-box"
+        "user-input user-input"
+        "guess-grid guess-grid";
+    align-items: start;
+    column-gap: 10px;
+    row-gap: 5px;
+}
+
+.titlebar {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.speech-box {
+    grid-area: speech-box;
+    align-self: end;
+}
+
+.buttons {
+    height: 100%;
+    width: auto;
+    vertical-align: top;
+    flex-direction: row;
+    display: inline-flex;
+    align-items: center;
+}
+
+.buttons div {
+    float: left;
+    width: .75em;
+    height: .75em;
+    border-radius: 50%;
+    margin-left: 7px;
+    box-shadow: inset 0 0 1px gray;
+}
+
+.titlebar span,
+.titlebar a {
+    font-size: .75em;
+}
+
+.buttons div:first-child {
+    margin-left: 10px;
+}
+
+.user-input {
+    grid-area: user-input;
+    align-self: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "input input input input submit"
+        "counter display-grid display-grid display-grid display-grid";
+    align-items: start;
+    align-items: end;
+}
+
+.submit,
+.counter,
+.display-grid {
+    border: solid 1px white;
+}
+
+.input {
+    grid-area: input;
+    height: 100%;
+}
+
+.input input {
+    padding: 5px 0 5px 5px;
+}
+
+.submit {
+    text-align: center;
+    height: 100%;
+}
+
+.counter {
+    grid-area: counter;
+    align-self: center;
+    justify-self: center;
+    vertical-align: center;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.display-grid {
+    grid-area: display-grid;
+}
+
+.guess-grid {
+    grid-area: guess-grid;
+}
+
+.grid {
+    display: flex;
+    flex-flow: wrap row;
+    margin-top: 10px;
 }
 
 .grid div {
-    width: 25%;
+    width: 20%;
     line-height: 12vw;
     text-align: center;
     float: left;
-    font-size: 2em;
-}
-
-input[type="number"] {
-    font-size: 16px;
-    font-family: inherit;
+    font-size: 1.5em;
 }

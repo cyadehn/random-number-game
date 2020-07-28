@@ -13,12 +13,11 @@ const sceneInit = () => {
         // resetWindow
         appWindow.submit.disabled = false;
         //reset guess grid
-        appWindow.guessGrid.innerHTML = "<p>Previous Guesses:</p>";
         currentScene.gridRef.forEach( (x) => {
             appWindow.guessGrid.appendChild(x);
         });
         currentScene.gridRef = Array.from(document.querySelectorAll("#grid div"));
-        appWindow.guessGrid.setAttribute("style", "display: none");
+        appWindow.guessGrid.setAttribute("style", "visibility: hidden");
         typewriter( currentScene );
     }
     console.info("Scene initialized!")

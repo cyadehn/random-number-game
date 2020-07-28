@@ -5,30 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=B612+Mono&display=swap" rel="stylesheet"> 
     <title>RaNDOM</title>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <span><a href="..">Return to Main Page</a></span>
-        </header>
-        <main class="app-demo" id="app">
-            <section class="inherit game-start">
-                <div class="inherit basic-game">
-                    <p class="inherit speech-box" id="speech-box"></p>
-                    <p class="inherit counter">Counter: <span id="counter"></span></p>
-                    <div class="inherit" id="user-input">
-                        <input class="inherit" type="number" id="guess-input">
-                        <button class="inherit" type="submit" id="guess-submit">>>></button>
-                    </div>
-                    <p id="monitor"></p>
-                    <p class="inherit display-grid" id="display-grid">Click & hold here to see your previous guesses:</p>
-                    <div class="inherit grid" id="grid"></div>
+    <main class="app" id="app">
+        <div class="inherit basic-game" id="basic-game">
+            <div class="titlebar">
+                <div class="buttons">
+                    <div class="close"></div>
+                    <div class="minimize"></div>
+                    <div class="maximize"></div>
                 </div>
-            </section>
-        </main>
-    </div>
+                <span>.../guess-with-me.exec</span>
+                <a href="..">RETURN HOME</a>
+            </div>
+            <div class="window">
+                <p class="speech-box" id="speech-box"></p>
+                <div class="user-input" id="user-input">
+                    <div class="input"> > <input class="" type="number" id="guess-input"></div>
+                    <button class="submit" type="submit" id="guess-submit">>>></button>
+                    <p class="counter" id="counter">00m:00s</p>
+                    <p class="display-grid" id="display-grid">HOLD HERE FOR PREVIOUS GUESSES</p>
+                </div>
+                <div class="guess-grid">
+                    <div class="grid" id="grid"></div>
+                </div>
+            </div>
+        </div>
+        <div class="main-game" id="main-game" style="display: none">
+        </div>
+    </main>
     <script src="./js/debug.js"></script>
     <script src="./js/2-DOM.js"></script>
     <script src="./js/4-scores.js"></script>
