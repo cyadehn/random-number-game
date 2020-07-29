@@ -45,7 +45,8 @@ p {
     margin: 0;
 }
 
-input[type="number"] {
+input {
+    border-radius: 0;
     font-family: inherit;
 }
 

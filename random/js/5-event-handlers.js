@@ -37,24 +37,31 @@ appWindow.commandLine.addEventListener("keyup", (e) => {
   });
   
   appWindow.gridBtn.addEventListener("mousedown", (e) => {
+    e.preventDefault();
     displayGuesses(e);
   });
   appWindow.gridBtn.addEventListener("mouseup", (e) => {
+    e.preventDefault();
     displayGuesses(e);
   });
   appWindow.gridBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
     displayGuesses(e);
   });
   appWindow.gridBtn.addEventListener("touchend", (e) => {
+    e.preventDefault();
     displayGuesses(e);
   });
   appWindow.gridBtn.addEventListener ("mouseout", (e) => {
+    e.preventDefault();
     displayGuesses(e);
   });
   appWindow.gridBtn.addEventListener ("touchleave", (e) => {
+    e.preventDefault();
     displayGuesses(e);
   });
   appWindow.gridBtn.addEventListener ("touchcancel", (e) => {
+    e.preventDefault();
     displayGuesses(e);
   });
   
