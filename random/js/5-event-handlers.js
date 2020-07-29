@@ -1,6 +1,6 @@
 /* Event Handlers */
 const displayGuesses = (event) => {
-    const target = appWindow.displayGrid;
+    const target = appWindow.guessWindow;
     target.setAttribute("style", "visibility: hidden");
     
     if ( event.type == "mousedown" || event.type == "touchstart" ) {
@@ -60,6 +60,5 @@ appWindow.commandLine.addEventListener("keyup", (e) => {
   
   window.addEventListener("load", () => {
       sceneInit();
-      appWindow.commandLine.focus();
   });
 

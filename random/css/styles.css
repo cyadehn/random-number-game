@@ -1,18 +1,8 @@
-/* See if the game will meet the requirements:
-Responsive:
-Phones: Get rid of the tracking grid, do a list of numbers? Center the input (account for the keyboard)
-Mid-large: Resize main window, others?
-Design a landing page before entering with basic information about yourself */
+
+/* Design a landing page before entering with basic information about yourself */
 
 * {
     box-sizing: border-box;
-}
-
-:root {
-
-
-    /* Cosmetic */
-    --window-title: 
 }
 
 /* Base Styles */
@@ -25,14 +15,14 @@ body {
 }
 
 .app {
-    height: auto;
     border-radius: 5px 5px 3px 3px;
     overflow: hidden;
     box-shadow: 0 2px 20px rgba(0,0,0,.8);
 }
 
 .speech-box {
-    padding: 0 10px;
+    background: linear-gradient(0deg, #2a2f36, #000);
+    padding: 10px;
 }
 
 .window {
@@ -42,7 +32,7 @@ body {
 }
 
 .display-grid,
-.grid div {
+.grid .not-guessed {
     background: #f9daa6;
     color: rgb(42, 47, 55);
 }
@@ -86,12 +76,12 @@ input[type="number"] {
 }
 
 .guessed {
-    background-color: red;
+    background-color: #e04632;
     color: white;
 }
 
 .correct {
-    background-color: lime;
+    background-color: #49dd8c;
 }
 
 .input,
@@ -99,6 +89,13 @@ input[type="number"] {
 .counter {
     background-color: white;
     color: black;
+}
+
+.submit,
+.counter,
+.display-grid,
+.user-input {
+    border: solid 1px white;
 }
 
 .display-grid {
@@ -123,7 +120,16 @@ input[type="number"] {
         "guess-grid guess-grid";
     align-items: start;
     column-gap: 10px;
-    row-gap: 5px;
+    padding: 5px;
+    height: 100%;
+}
+
+.secondary {
+    margin-top: 10px;
+}
+
+.secondary .window {
+    display: block;
 }
 
 .titlebar {
@@ -177,24 +183,17 @@ input[type="number"] {
         "counter display-grid display-grid display-grid display-grid";
     align-items: start;
     align-items: end;
-}
-
-.submit,
-.counter,
-.display-grid {
-    border: solid 1px white;
+    overflow: hidden;
 }
 
 .input {
     grid-area: input;
     height: 100%;
-}
-
-.input input {
     padding: 5px 0 5px 5px;
 }
 
 .submit {
+    grid-area: submit;
     text-align: center;
     height: 100%;
 }
@@ -204,9 +203,11 @@ input[type="number"] {
     align-self: center;
     justify-self: center;
     vertical-align: center;
+    text-align: center;
     margin: 0;
     height: 100%;
     width: 100%;
+    padding: 2px;
 }
 
 .display-grid {
@@ -220,7 +221,7 @@ input[type="number"] {
 .grid {
     display: flex;
     flex-flow: wrap row;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .grid div {
@@ -229,4 +230,36 @@ input[type="number"] {
     text-align: center;
     float: left;
     font-size: 1.5em;
+}
+
+/* Media Queries */
+
+@media (min-width: 450px) {
+    .grid div {
+        width: 10%;
+        line-height: 12vw;
+        text-align: center;
+        float: left;
+        font-size: 1.5em;
+    }
+}
+
+@media (min-width: 890px) {
+    .top {
+        display: grid;
+        grid-template-areas: "app app secondary";
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 100vh;
+    }
+
+    .primary {
+        grid-area: app;
+        width: 100%;
+    }
+
+    .secondary {
+        grid-area: secondary;
+        margin-top: 0;
+        margin-left: 10px;
+    }
 }

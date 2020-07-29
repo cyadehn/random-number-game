@@ -9,8 +9,8 @@
     <title>RaNDOM</title>
 </head>
 <body>
-    <main class="app" id="app">
-        <div class="inherit basic-game" id="basic-game">
+    <main class="top" id="app">
+        <div class="app primary" id="basic-game">
             <div class="titlebar">
                 <div class="buttons">
                     <div class="close"></div>
@@ -23,16 +23,29 @@
             <div class="window">
                 <p class="speech-box" id="speech-box"></p>
                 <div class="user-input" id="user-input">
-                    <div class="input"> > <input class="" type="number" id="guess-input"></div>
+                    <input class="input" type="number" id="guess-input" placeholder="Type your guess here...">
                     <button class="submit" type="submit" id="guess-submit">>>></button>
                     <p class="counter" id="counter">00m:00s</p>
-                    <p class="display-grid" id="display-grid">HOLD HERE FOR PREVIOUS GUESSES</p>
-                </div>
-                <div class="guess-grid">
-                    <div class="grid" id="grid"></div>
+                    <p class="display-grid" id="toggle-grid">HOLD HERE FOR PREVIOUS GUESSES</p>
                 </div>
             </div>
         </div>
+        <div class="app secondary" id="guess-window">
+                <div class="titlebar">
+                    <div class="buttons">
+                        <div class="close"></div>
+                        <div class="minimize"></div>
+                        <div class="maximize"></div>
+                    </div>
+                    <span>exec::guessed</span>
+                    <a></a>
+                </div>
+                <div class="window">
+                    <div class="guess-grid">
+                        <div class="grid" id="grid"></div>
+                    </div>
+                </div>
+            </div>
         <div class="main-game" id="main-game" style="display: none">
         </div>
     </main>

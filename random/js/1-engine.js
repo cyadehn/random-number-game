@@ -17,10 +17,11 @@ const sceneInit = () => {
             appWindow.guessGrid.appendChild(x);
         });
         currentScene.gridRef = Array.from(document.querySelectorAll("#grid div"));
-        appWindow.guessGrid.setAttribute("style", "visibility: hidden");
+        appWindow.guessWindow.setAttribute("style", "visibility: hidden");
         typewriter( currentScene );
     }
-    console.info("Scene initialized!")
+    console.info("Scene initialized!");
+    appWindow.commandLine.focus();
 }
 
 const checkAnswer = (e) => {
