@@ -7,7 +7,7 @@ const response = (scene) => {
     let dx = scene.dialogue;
 
     if ( scene.attempts === 0 ) {
-        responseText = dx.intro;
+        responseText = dx.intro();
     } else if ( guess < 0 || guess > scene.upper || !guess ) {
         responseText = dx.invalid;
     } else if ( scene.possibleGuesses.indexOf(guess) === -1 ) {
@@ -15,7 +15,7 @@ const response = (scene) => {
     } else if ( guess != scene.randomNumber ) {
         responseText = dx.incorrect;
     } else {
-        responseText = dx.correct;
+        responseText = dx.correct();
     }
     responseText = responseText.toUpperCase();
     return responseText;
