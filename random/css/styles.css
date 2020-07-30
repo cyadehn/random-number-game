@@ -119,7 +119,7 @@ body {
     margin: 0;
 }
 
-body .titlebar {
+body > .titlebar {
     width: 100vw;
 }
 
@@ -158,7 +158,7 @@ body .titlebar {
     position: static;
 }
 
-.titlebar {
+.app .titlebar {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
