@@ -9,11 +9,11 @@ const response = (scene) => {
     if ( scene.attempts === 0 ) {
         responseText = dx.intro();
     } else if ( guess < 0 || guess > scene.upper || !guess ) {
-        responseText = dx.invalid;
+        responseText = dx.invalid();
     } else if ( scene.possibleGuesses.indexOf(guess) === -1 ) {
         responseText = dx.alreadyGuessed;
     } else if ( guess != scene.randomNumber ) {
-        responseText = dx.incorrect;
+        responseText = dx.incorrect();
     } else {
         responseText = dx.correct();
     }
