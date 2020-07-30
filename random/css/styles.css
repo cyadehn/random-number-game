@@ -271,6 +271,10 @@ body .titlebar {
         margin-left: 10px;
     }
 
+    .app .window {
+        position: absolute;
+    }
+
     .grid {
         flex-direction: column;
     }
