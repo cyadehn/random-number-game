@@ -32,7 +32,7 @@ const guessArray = (scene, mode) => {
             }
             array.push(n);
             for ( let i = 1; array.length < range; i++ ) {
-                array.push( n + 1 );
+                array.push( n + i );
             }
             return array;
         }
