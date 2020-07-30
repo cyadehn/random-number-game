@@ -11,7 +11,6 @@ body {
     font-family: 'B612 mono', monospace;
     font-size: 16px;
     background-color: rgb(170, 139, 118);
-    padding: 10px;
 }
 
 .app {
@@ -35,6 +34,14 @@ body {
 .grid .not-guessed {
     background: #f9daa6;
     color: rgb(42, 47, 55);
+}
+
+.user-input {
+    background: #fff;
+}
+
+.input {
+    all: unset;
 }
 
 header {
@@ -107,6 +114,18 @@ input {
 }
 
 /* Layout */
+
+body {
+    margin: 0;
+}
+
+body .titlebar {
+    width: 100vw;
+}
+
+.top {
+    margin: 20px;
+}
 
 .primary {
     height: 40vh;
@@ -199,10 +218,8 @@ input {
     grid-area: counter;
     align-self: center;
     justify-self: center;
-    vertical-align: center;
     text-align: center;
     margin: 0;
-    height: 100%;
     width: 100%;
     padding: 2px;
 }
