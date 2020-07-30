@@ -85,7 +85,7 @@ const sceneData = [
         "game-start", //name
         "start", //activeWindow
         300, //upper
-        40, //range
+        20, //range
         {
             intro: () => { return `> Hi, there! Think you can beat me at a game? Let's see... Type below to guess a number between 1 and ${currentScene.upper}!` },
             incorrect: `> Hm. That wasn't it, huh? Just keep guessing! What's another number between 1 and ${this.upper}?`,
