@@ -28,7 +28,7 @@ body {
 .window {
     background-color: black;
     color: white;
-    padding: 0 4px;
+    padding: 4px;
 }
 
 .display-grid,
@@ -58,7 +58,6 @@ input {
 /* Cosmetic */
 
 .titlebar {
-    grid-area: titlebar;
     height: 1.5em;
     background: linear-gradient(90deg, #ddcbb3, #c9b39b);
     
@@ -101,36 +100,43 @@ input {
 
 .display-grid {
     display: inline-block;
-    /* width: 50%; */
     font-size: .85em;
     text-align: center;
     padding: 5px 10px;
-    /* border-radius: 50px; */
 }
 
 /* Layout */
 
-.window {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 5px 25vh auto 1fr;
-    grid-template-areas:
-        "titlebar titlebar"
-        "speech-box speech-box"
-        "user-input user-input"
-        "guess-grid guess-grid";
-    align-items: start;
-    column-gap: 10px;
+.primary {
+    height: 40vh;
+}
+
+.secondary .window {
+    height: auto;
+    position: static;
+}
+
+.app {
+    position: relative;
+}
+
+.app:first-child .window {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.primary .window {
     padding: 5px;
-    height: 100%;
+    position: absolute;
+    top: 1.5em;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .secondary {
     margin-top: 10px;
-}
-
-.secondary .window {
-    display: block;
 }
 
 .titlebar {
@@ -139,11 +145,6 @@ input {
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
-}
-
-.speech-box {
-    grid-area: speech-box;
-    align-self: end;
 }
 
 .buttons {
@@ -174,22 +175,17 @@ input {
 }
 
 .user-input {
-    grid-area: user-input;
-    align-self: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: 1fr;
     grid-template-areas:
         "input input input input submit"
         "counter display-grid display-grid display-grid display-grid";
     align-items: start;
-    align-items: end;
-    overflow: hidden;
 }
 
 .input {
     grid-area: input;
-    height: 100%;
     padding: 5px 0 5px 5px;
 }
 
@@ -222,7 +218,6 @@ input {
 .grid {
     display: flex;
     flex-flow: wrap row;
-    margin-top: 5px;
 }
 
 .grid div {
@@ -236,6 +231,9 @@ input {
 /* Media Queries */
 
 @media (min-width: 450px) {
+    .speech-box {
+        padding-right: 20%;
+    }
     .grid div {
         width: 10%;
         line-height: 12vw;
@@ -250,17 +248,29 @@ input {
         display: grid;
         grid-template-areas: "app app secondary";
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 100vh;
+        grid-template-rows: 80vh;
     }
 
     .primary {
         grid-area: app;
-        width: 100%;
+        height: unset;
     }
 
     .secondary {
         grid-area: secondary;
         margin-top: 0;
         margin-left: 10px;
+    }
+
+    .grid {
+        flex-direction: column;
+    }
+
+    .grid div {
+        width: 100%;
+        line-height: 10%;
+        text-align: center;
+        float: left;
+        font-size: 1.5em;
     }
 }
