@@ -249,10 +249,11 @@ body > .titlebar {
 }
 
 @media (min-width: 640px) {
-    body {
+    
+    .titlebar {
         font-size: .85em;
     }
-
+    
     .top {
         display: grid;
         grid-template-areas: "app app secondary";
