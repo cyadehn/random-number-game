@@ -31,15 +31,22 @@ const checkAnswer = (e) => {
     e.preventDefault();
 
     if ( currentScene.attempts === 0 ) {
-        t0 = Date.now();
+        score[sceneIndex].player.t0 = Date.now();
+        computer();
         counterID =  window.setInterval(counterUpdate, 100);
     }
     
     currentScene.attempts += 1;
     guess = parseInt(appWindow.commandLine.value);
-    typewriter( currentScene );
-    guessTracker();
+    if (!(guess === currentScene.randomNumber)) {
+        typewriter( currentScene );
+        guessTracker();
+    }
     if (guess === currentScene.randomNumber ) {
+        score[sceneIndex].player.t1 = Date.now();
+        updateScore();
+        typewriter( currentScene );
+        guessTracker();
         endGame();
     }
     appWindow.commandLine.value = "";
@@ -48,9 +55,6 @@ const checkAnswer = (e) => {
 const endGame = () => {
     
     console.info("The game is ending...");
-
-    updateScore();
-    currentScene.t1 = Date.now();
     clearInterval(counterID);
     
     appWindow.submit.disabled = true;
