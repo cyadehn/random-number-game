@@ -14,32 +14,28 @@ const guessArray = (scene, mode) => {
         return array;
     } 
     if ( mode === "range" ) {
-        let array = [n];
-        let i = 1;
-        do {
-            //Upper/lower limits reached
-            if ( !(n+i <= upper) ) {
-                array.unshift(n-i);
-                console.log(`Limits unshift: ${n-i}`);
+        let array = [];
+        if ( upper === range ) {
+            let array = [];
+            for ( let i = 0; i < upper; i ++ ) {
+            array.push( i + 1 );
             }
-            if ( !(n-i > 0) ) {
-                array.push(n+i);
-                console.log(`Limits push: ${n+i}`);
+            console.log(array);
+            return array;
+        } else {
+            let nPosition = getRandomNumber(range) - 1;
+            for ( let i = 0; i < nPosition; i ++ ) {
+                let number = n - nPosition + i;
+                if ( number > 0 ) {
+                    array.push(n-nPosition+i);
+                }
             }
-
-            //Normal Behavior
-            if ( n + i <= upper && n-i > 0 ) {
-                array.push(n+i);
-                console.log(`Normal push: ${n+i}`);
+            array.push(n);
+            for ( let i = 1; array.length < range; i++ ) {
+                array.push( n + 1 );
             }
-            if ( n - i > 0 && n+i <= upper && array.length < range ) {
-                array.unshift(n-i);
-                console.log(`Normal unshift: ${n-i}`);
-            }
-            i += 1;
-        } while ( array.length < range )
-        console.log(array);
-        return array;
+            return array;
+        }
     }  
 }
 
@@ -55,9 +51,9 @@ const gridArray = (scene) => { //rewrite to build via the guesses array
     return array;
 }
 
-const getRandomNumber = (scene) => {
+const getRandomNumber = (upper) => {
     let num = 0;
-    num = Math.floor(Math.random() * scene.upper) + 1;
+    num = Math.floor(Math.random() * upper) + 1;
     return num;
 }
 
@@ -66,7 +62,7 @@ function GameScene(type, name, activeWindow, upper, range, dialogue) {
     this.name = name;
     this.activeWindow = activeWindow;
     this.upper = upper;
-    this.randomNumber = getRandomNumber(this);
+    this.randomNumber = getRandomNumber(this.upper);
     this.range = range;
     this.displayRef = guessArray(this, "range"); //range-based tracker
     this.possibleGuesses = guessArray(this, "all"); //all possible guesses
@@ -88,8 +84,8 @@ const sceneData = [
         "game", //type
         "game-start", //name
         "start", //activeWindow
-        20, //upper
-        20, //range
+        300, //upper
+        40, //range
         {
             intro: `> Hi, there! Think you can beat me at a game? Let's see... Type below to guess a number between 1 and ${this.upper}!`,
             incorrect: `> Hm. That wasn't it, huh? Just keep guessing! What's another number between 1 and ${this.upper}?`,
