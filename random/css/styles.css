@@ -40,10 +40,6 @@ body {
     background: #fff;
 }
 
-.input {
-    all: unset;
-}
-
 header {
     height: 5vh;
 }
@@ -56,11 +52,11 @@ input {
     border-radius: 0;
     font-family: inherit;
     font-size: inherit;
+    padding: 1px;
 }
 
-.submit,
-.input input {
-    all: unset;
+.input {
+    border: unset;
 }
 
 /* Cosmetic */
@@ -200,7 +196,7 @@ body .titlebar {
     grid-template-areas:
         "input input input input submit"
         "counter display-grid display-grid display-grid display-grid";
-    align-items: start;
+    align-items: center;
 }
 
 .input {
@@ -211,15 +207,11 @@ body .titlebar {
 .submit {
     grid-area: submit;
     text-align: center;
-    height: 100%;
 }
 
 .counter {
     grid-area: counter;
     align-self: center;
-    justify-self: center;
-    text-align: center;
-    margin: 0;
     width: 100%;
     padding: 2px;
 }
@@ -283,4 +275,4 @@ body .titlebar {
         width: 50%;
         height: 10%;
     }
-}
+} 
