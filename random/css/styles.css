@@ -135,6 +135,10 @@ input {
     margin-top: 10px;
 }
 
+.secondary .window {
+    position: static;
+}
+
 .titlebar {
     display: flex;
     flex-flow: row wrap;
