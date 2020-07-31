@@ -1,6 +1,6 @@
 # RaNDOM Number Guessing Game
 
-## A description of your project
+## Project Description
 
 This game is loosely based off a random number guessing game that was taught in a JavaScript course on Treehouse. You will start the game being prompted by the browser to guess a number between 1 and a set upper number. The computer will respond differently if you enter:
 
