@@ -123,6 +123,10 @@ body > .titlebar {
     width: 100vw;
 }
 
+.titlebar a {
+    padding-left: 5px;
+}
+
 .top {
     margin: 20px;
 }

@@ -91,7 +91,7 @@ const sceneData = [
             incorrect: () => { return `> Hm. That wasn't it, huh? Just keep guessing! What's another number between 1 and ${currentScene.upper}?` },
             invalid: () => { return `> ...that doesn't look like a number between 1 and ${currentScene.upper}... That's okay! Take a breather and then you're sure to get it!` },
             alreadyGuessed: `> Sorry... you already guessed that number. Try again!`,
-            correct: () => { return `> You did it! The number was ${currentScene.randomNumber} and it only took you ${currentScene.attempts} tries and ${score[sceneIndex].player.tSec} seconds to get it. Would you like to see how the computer did?` }
+            correct: () => { return `> You did it! The number was ${currentScene.randomNumber} and it only took you ${currentScene.attempts} tries and ${score[sceneIndex].player.tSec} seconds to get it. In case you were wondering, it took me ${score[sceneIndex].computer.attempts} attempts and ${score[sceneIndex].computer.tSec < 0.01 ? "less than 0.01" : score[sceneIndex].computer.tSec} seconds. No big deal! :)` }
         } //dialogue
     ],
     [

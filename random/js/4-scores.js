@@ -1,12 +1,12 @@
 let score = [
     {
         computer: {
-            time: [],
-            attempts: []
+            time: []
+            // attempts: []
         },
         player: {
-            time: [],
-            attempts: []
+            time: []
+            // attempts: []
         }
     }
 ]

@@ -141,9 +141,11 @@ const computer = () => {
     score[sceneIndex].computer.t0 = Date.now();
     let guess = 0;
     let randomNumber = currentScene.randomNumber;
+    score[sceneIndex].computer.attempts = 0;
     do {
         if ( !(guess === randomNumber) ) {
             guess += 1;
+            score[sceneIndex].computer.attempts += 1;
         }
         if ( guess === randomNumber ) {
             score[sceneIndex].computer.t1 = Date.now();
