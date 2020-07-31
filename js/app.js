@@ -74,6 +74,7 @@ const sceneData = [
 
 // Scene Constructor Functions
 
+// Build reference arrays for all possible guesses/range of displayed guesses
 const guessArray = (scene, mode) => {
     let n = scene.randomNumber;
     let upper = scene.upper;
@@ -112,7 +113,8 @@ const guessArray = (scene, mode) => {
     }  
 }
 
-const gridArray = (scene) => { //rewrite to build via the guesses array
+//Build div for each hint-grid item in range
+const gridArray = (scene) => {
     let range = scene.displayRef;
     let array = [];
     for ( let i = 0; i < range.length; i ++ ) {
@@ -144,13 +146,14 @@ function GameScene(type, name, activeWindow, upper, range, dialogue) {
     this.dialogue = dialogue;
 }
 
-function ConversationScene( type, name, activeWindow, events ) {
-    this.type = type;
-    this.name = name;
-    this.activeWindow = activeWindow;
-    this.events = events;
-    this.eventIndex = 0;
-}
+//Future expansion of scene types will be based on different constructors or prototypes
+// function ConversationScene( type, name, activeWindow, events ) {
+//     this.type = type;
+//     this.name = name;
+//     this.activeWindow = activeWindow;
+//     this.events = events;
+//     this.eventIndex = 0;
+// }
 
 const gameInit = () => {
     let scenes = [];
@@ -160,10 +163,10 @@ const gameInit = () => {
             scenes[i] = new GameScene(...sceneData[i]);
         }
         if ( type == "conversation" ) {
-            scenes[i] = new ConversationScene(...sceneData[i]);
+            // scenes[i] = new ConversationScene(...sceneData[i]);
         }
         if ( type == "cutscene" ) {
-    
+            // scenes[i] = new CutScene(...sceneData[i]);
         }
     }
     console.info("Game initialized!");
@@ -194,47 +197,46 @@ const response = (scene) => {
     return responseText;
 }
 
-const glitchType = (scene) => {
+// const glitchType = (scene) => {
 
-    //Configure glitch function speed
-    let glitchSpeed = 4;
-    //Configure target HTML element
-    let target = appWindow.speechBox;
+//     //Configure glitch function speed
+//     let glitchSpeed = 4;
+//     //Configure target HTML element
+//     let target = appWindow.speechBox;
 
-    let dialogue = scene.dialogue;
-    let arrayIndex = 0;
-    let lineIndex = 0;
+//     let dialogue = scene.dialogue;
+//     let arrayIndex = 0;
+//     let lineIndex = 0;
 
-    const printLine = () => {
-        if ( lineIndex < dialogue[arrayIndex].length ) {
-            if ( dialogue[arrayIndex]) {
-                target.innerHTML += dialogue[arrayIndex].charAt(lineIndex);
-                lineIndex += 1;
-                console.log("line index increased to " + lineIndex);
-                typewriterID = setTimeout(printLine, glitchSpeed);
-            }
-        } else if ( index < dialogue.length ) {
-            domVar.innerHTML = "";
-            index += 1;
-            lineIndex = 0;
-            printLine();
-            console.log("restart");
-        }
-    }
-    printLine();
-}
+//     const printLine = () => {
+//         if ( lineIndex < dialogue[arrayIndex].length ) {
+//             if ( dialogue[arrayIndex]) {
+//                 target.innerHTML += dialogue[arrayIndex].charAt(lineIndex);
+//                 lineIndex += 1;
+//                 console.log("line index increased to " + lineIndex);
+//                 typewriterID = setTimeout(printLine, glitchSpeed);
+//             }
+//         } else if ( index < dialogue.length ) {
+//             domVar.innerHTML = "";
+//             index += 1;
+//             lineIndex = 0;
+//             printLine();
+//             console.log("restart");
+//         }
+//     }
+//     printLine();
+// }
 
 const typeResponse = (scene) => {
     
     //Configure typewriter function speed
     let speed = 15;
-    //Configure target HTML element & clear previous message
     let target = appWindow.speechBox;
+    //Clear previous message
     target.innerHTML = "";
 
     let responseText = response(scene);
     let i = 0;
-    // target.innerHTML = responseText;
 
     const printChar = () => {
 
@@ -252,17 +254,18 @@ const typeResponse = (scene) => {
     printChar();
 }
 
-//combine two functions above into below
+//Future scene key-value pairs will determine which typing mode is used
 const typewriter = ( scene ) => {
     clearTimeout(typewriterID);
     if ( scene.type == "game" ) {
         typeResponse(scene);
     }
-    if ( scene.type == "line" ) {
-        glitchType(scene);
+    if ( scene.type == "cutscene" ) {
+        // glitchType(scene);
     }
 }
 
+//Calculate time elapsed based on start and end times
 const tSec = ( scene ) => {
     console.info("Calculating time elapsed...");
     let start = scene.t0;
@@ -282,8 +285,7 @@ const guessTracker = () =>{
         currentScene.possibleGuesses.splice(guessIndex, 1);
     }
 
-
-    //Update guessGrid classes
+    //Update hint grid div classes
     let guessDiv;
     let displayRef = currentScene.displayRef;
     let displayIndex = displayRef.indexOf(guess);
@@ -310,14 +312,16 @@ const counterUpdate = () => {
     target.innerHTML = minutes + "m:" + seconds + "s";
 }
 
+//Play game as computer
 const computer = () => {
     score[sceneIndex].computer.t0 = Date.now();
     let guess = 0;
     let randomNumber = currentScene.randomNumber;
+    let upper = currentScene.upper;
     score[sceneIndex].computer.attempts = 0;
     do {
         if ( !(guess === randomNumber) ) {
-            guess += 1;
+            guess = getRandomNumber(upper);
             score[sceneIndex].computer.attempts += 1;
         }
         if ( guess === randomNumber ) {
@@ -336,6 +340,7 @@ const sceneInit = () => {
     }
     if ( currentScene.type == "game" ) {
         appWindow.submit.disabled = false;
+        //append hint grid divs to current window
         currentScene.gridRef.forEach( (x) => {
             appWindow.guessGrid.appendChild(x);
         });
@@ -351,6 +356,7 @@ const checkAnswer = (e) => {
     console.info("Checking answer...");
     e.preventDefault();
     if ( currentScene.attempts === 0 ) {
+        //Record start time, start computer's game and counter
         score[sceneIndex].player.t0 = Date.now();
         computer();
         counterID =  window.setInterval(counterUpdate, 100);
